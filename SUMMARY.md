@@ -24,6 +24,7 @@
   - [基础术语](skywalking/base.md)
   - 3.1 接入说明
      - [使用容器 Sidecar 的方式接入](skywalking/docker-sidecar.md)
+     - [使用Python探针接入](skywalking\Python-agent.md) 
   - [3.2 探针参数说明](skywalking/agent-settings.md)
   - 3.3 高级功能
      - [告警对接](skywalking/alarm.md) 
