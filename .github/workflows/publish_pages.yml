@@ -26,7 +26,7 @@ jobs:
       uses: tuliren/publish-gitbook@v1.0.0
       with:
        # Github token for the repo
-        github_token: $GITHUB_TOKEN
+        github_token: ${{secrets.DEPLOY_TOKEN}}
 
     - name: Gitbook Action & GitBook PDF
       uses: zanderzhao/gitbook-action@v1.2.2
