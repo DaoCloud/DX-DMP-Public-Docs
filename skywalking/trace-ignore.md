@@ -91,7 +91,7 @@ spec:
             - "sh"
             - "-c"
             - > 
-              mv /sidecar/skywalking/agent/optional-plugins/apm-trace-ignore-plugin-6.5.0-SNAPSHOT.jar /sidecar/skywalking/agent/plugins; ➊
+              mv /sidecar/skywalking/agent/optional-plugins/apm-trace-ignore-plugin-8.3.0-SNAPSHOT.jar /sidecar/skywalking/agent/plugins; ➊
               echo 'trace.ignore_path=${TRACE_IGNORE_PATH:/api/sail/**}' >> /sidecar/skywalking/agent/config/apm-trace-ignore-plugin.config; ➋
               cp -r /sidecar /target; 
           volumeMounts:
