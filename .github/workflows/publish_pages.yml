@@ -6,9 +6,9 @@ name: CI
 # events but only for the dmp/2.4.0 branch
 on:
   push:
-    branches: [ dmp/2.4.0 ]
+    branches: [ dmp/2.5.0 ]
   pull_request:
-    branches: [ dmp/2.4.0 ]
+    branches: [ dmp/2.5.0 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
