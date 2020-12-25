@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>使用Python探针接入 · DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册</title>
+        <title>Python 应用接入 · DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -515,7 +515,7 @@
                 <a href="Python-agent.html">
             
                     
-                    使用Python探针接入
+                    Python 应用接入
             
                 </a>
             
@@ -846,7 +846,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >使用Python探针接入</a>
+        <a href=".." >Python 应用接入</a>
     </h1>
 </div>
 
@@ -862,27 +862,28 @@
                                 <section class="normal markdown-section">
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#python-&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>Python &#x63A2;&#x9488;&#x63A5;&#x5165;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><b></b>&#x524D;&#x7F6E;&#x6761;&#x4EF6;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><b></b>&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;"><b></b>&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;Python&#x5E93;</a></li><li><span class="title-icon "></span><a href="#demo&#x9879;&#x76EE;&#x7684;&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>Demo&#x9879;&#x76EE;&#x7684;&#x63A2;&#x9488;&#x63A5;&#x5165;</a></li><li><span class="title-icon "></span><a href="#&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><b></b>&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;</a></li></ul></ul></div><a href="#python-&#x63A2;&#x9488;&#x63A5;&#x5165;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="python-&#x63A2;&#x9488;&#x63A5;&#x5165;"><a name="python-&#x63A2;&#x9488;&#x63A5;&#x5165;" class="anchor-navigation-ex-anchor" href="#python-&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="python-&#x63A2;&#x9488;&#x63A5;&#x5165;" class="plugin-anchor" href="#python-&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>Python &#x63A2;&#x9488;&#x63A5;&#x5165;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x6D89;&#x53CA;&#x5230;Python&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8BE5;&#x6587;&#x6863;&#x3002;&#x672C;&#x6587;&#x4EE5;Flask&#x5E94;&#x7528;&#x4E3A;&#x4F8B;&#x8BB2;&#x89E3;&#x5982;&#x4F55;&#x5C06;Flask&#x7684;endpoints&#x63A5;&#x5165;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x94FE;&#x8DEF;&#x8FFD;&#x8E2A;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x6D89;&#x53CA;&#x5230; Python&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8BE5;&#x6587;&#x6863;&#x3002;&#x672C;&#x6587;&#x4EE5; Flask &#x5E94;&#x7528;&#x4E3A;&#x4F8B;&#x8BB2;&#x89E3;&#x5982;&#x4F55;&#x5C06; Flask &#x7684;endpoints &#x63A5;&#x5165;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x94FE;&#x8DEF;&#x8FFD;&#x8E2A;&#x3002;</p>
 <h2 id="&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><a name="&#x524D;&#x7F6E;&#x6761;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x524D;&#x7F6E;&#x6761;&#x4EF6;" class="plugin-anchor" href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x7F6E;&#x6761;&#x4EF6;</h2>
 <h3 id="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><a name="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;" class="plugin-anchor" href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;</h3>
 <ul>
 <li><p>&#x73AF;&#x5883; Python 3.7.9 </p>
 </li>
-<li><p>Python agent&#x5305;&#x88AB;&#x53D1;&#x5E03;&#x5728;<a href="https://pypi.org/project/apache-skywalking/" target="_blank">Pypi</a>,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>pip</code>&#x5B89;&#x88C5;&#xFF1A;</p>
+<li><p>Python agent&#x5305;&#x88AB;&#x53D1;&#x5E03;&#x5728;<a href="https://pypi.org/project/apache-skywalking/" target="_blank">Pypi</a>, &#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>pip</code>&#x5B89;&#x88C5;&#xFF1A;</p>
 </li>
 </ul>
-<pre><code>#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;gRPC&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA
-pip install &quot;apache-skywalking&quot;
+<pre><code class="lang-bash"><span class="hljs-comment">#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;gRPC&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA</span>
+pip install <span class="hljs-string">&quot;apache-skywalking&quot;</span>
 
-#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;http&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA
-pip install &quot;apache-skywalking[http]&quot;
+<span class="hljs-comment">#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;http&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA</span>
+pip install <span class="hljs-string">&quot;apache-skywalking[http]&quot;</span>
 
-#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;kafka&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA
-pip install &quot;apache-skywalking[kafka]&quot;
+<span class="hljs-comment">#&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E76;&#x4F7F;&#x7528;kafka&#x534F;&#x8BAE;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5230;OPA</span>
+pip install <span class="hljs-string">&quot;apache-skywalking[kafka]&quot;</span>
 
-#&#x5B89;&#x88C5;&#x7279;&#x5B9A;&#x7684;&#x7248;&#x672C; x.y.z
+<span class="hljs-comment">#&#x5B89;&#x88C5;&#x7279;&#x5B9A;&#x7684;&#x7248;&#x672C; x.y.z</span>
 pip install apache-skywalking==0.1.0
-</code></pre><p>&#x672C;&#x6587;&#x6863;&#x793A;&#x4F8B;&#x4E2D;&#x9700;&#x8981;&#x7684;&#x5E93;&#xFF1A;</p>
+</code></pre>
+<p>&#x672C;&#x6587;&#x6863;&#x793A;&#x4F8B;&#x4E2D;&#x9700;&#x8981;&#x7684;&#x5E93;&#xFF1A;</p>
 <pre><code>Flask==1.1.2
 redis==3.5.3
 </code></pre><h2 id="&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;"><a name="&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;" class="anchor-navigation-ex-anchor" href="#&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;" class="plugin-anchor" href="#&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;python&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76EE;&#x524D;&#x652F;&#x6301;&#x7684;Python&#x5E93;</h2>
@@ -986,7 +987,7 @@ redis==3.5.3
 &#x251C;&#x2500;&#x2500; app.py
 &#x251C;&#x2500;&#x2500; service.py
 &#x2514;&#x2500;&#x2500; userRepo.py
-</code></pre><p>userRepo.py</p>
+</code></pre><p>&#x5176;&#x4E2D; <strong>userRepo.py</strong> &#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> time
 <span class="hljs-keyword">import</span> redis
@@ -1008,7 +1009,7 @@ redisClient = redisConfig(<span class="hljs-string">&quot;localhost&quot;</span>
         time.sleep(<span class="hljs-number">0.5</span>)
         <span class="hljs-keyword">return</span> user
 </code></pre>
-<p>service.py</p>
+<p>&#x5176;&#x4E2D; <strong>service.py</strong> &#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-python"><span class="hljs-keyword">from</span> UserRepo <span class="hljs-keyword">import</span> UserRepo
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServce</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1017,7 +1018,7 @@ redisClient = redisConfig(<span class="hljs-string">&quot;localhost&quot;</span>
         user = self.userRepo.getUser(username=userName)
         <span class="hljs-keyword">return</span> user
 </code></pre>
-<p>app.py</p>
+<p>&#x5176;&#x4E2D; <strong>app.py</strong> &#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, url_for, request
 <span class="hljs-keyword">import</span> time
 <span class="hljs-keyword">import</span> json
@@ -1043,15 +1044,15 @@ app = Flask(__name__)
 &#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x5E93; Python agent SDK &#x9700;&#x8981;SkyWalking 8.0+ and Python 3.5+
 &#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;
 @ collector :SkyWalking &#x540E;&#x7AEF;&#x6536;&#x96C6;&#x5668;&#x5730;&#x5740;
-@ service :&#x670D;&#x52A1;&#x540D;&#x5B57;
+@ service :&#x670D;&#x52A1;&#x540D;&#x5B57;, &#x4EE5; @&#x7ED3;&#x5C3E;&#x4EE3;&#x8868;&#x8BE5;&#x670D;&#x52A1;&#x6240;&#x5728; DMP &#x79DF;&#x6237;&#x3002;
 &quot;&quot;&quot;</span>
 <span class="hljs-keyword">from</span> skywalking <span class="hljs-keyword">import</span> agent, config
-config.init(collector=<span class="hljs-string">&apos;127.0.0.1:11800&apos;</span>, service=<span class="hljs-string">&apos;python flask&apos;</span>)
+config.init(collector=<span class="hljs-string">&apos;127.0.0.1:11800&apos;</span>, service=<span class="hljs-string">&apos;python-flask@devTenant&apos;</span>)
 agent.start()
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
     app.run()
 </code></pre>
-<p>python flask&#x63A2;&#x9488;&#x7684;&#x63A5;&#x5165;&#x9700;&#x8981;&#x968F;&#x7740;flask&#x5E94;&#x7528;&#x4E00;&#x8D77;&#x542F;&#x52A8;&#xFF0C;&#x5982;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x7684;&#x5C55;&#x793A;&#xFF0C;&#x6B64;&#x5916;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>python flask &#x63A2;&#x9488;&#x7684;&#x63A5;&#x5165;&#x9700;&#x8981;&#x968F;&#x7740; flask &#x5E94;&#x7528;&#x4E00;&#x8D77;&#x542F;&#x52A8;&#xFF0C;&#x5982;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x7684;&#x5C55;&#x793A;&#xFF0C;&#x6B64;&#x5916;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x8BBE;&#x7F6E;&#x3002;</p>
 <h2 id="&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a name="&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="anchor-navigation-ex-anchor" href="#&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="plugin-anchor" href="#&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x652F;&#x6301;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
 <table>
 <thead>
@@ -1064,7 +1065,7 @@ agent.start()
 <tbody>
 <tr>
 <td>PSW_AGENT_NAME</td>
-<td>&#x5728; DMP &#x94FE;&#x8DEF;&#x8FFD;&#x8E2A; UI &#x4E2D;&#x5C55;&#x793A;&#x7684;&#x670D;&#x52A1;&#x540D;&#x3002;</td>
+<td>&#x5728; DMP &#x94FE;&#x8DEF;&#x8FFD;&#x8E2A; UI &#x4E2D;&#x5C55;&#x793A;&#x7684;&#x670D;&#x52A1;&#x540D;&#x3002;&#x4EE5; @&#x7ED3;&#x5C3E;&#x4EE3;&#x8868;&#x8BE5;&#x670D;&#x52A1;&#x6240;&#x5728; DMP &#x79DF;&#x6237;(&#x6BD4;&#x5982;  <strong>python-flask@devTenant</strong> &#x4EE3;&#x8868; <strong>devTenant</strong> &#x79DF;&#x6237;).</td>
 <td><code>Python Service Name</code></td>
 </tr>
 <tr>
@@ -1185,7 +1186,7 @@ agent.start()
 </tbody>
 </table>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; www.daocloud.io 2019 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2020-12-25 01:45:35
+2020-12-25 01:58:52
 </span></footer>
                                 
                                 </section>
@@ -1229,7 +1230,7 @@ agent.start()
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用Python探针接入","level":"1.4.2.2","depth":3,"next":{"title":"3.2 探针参数说明","level":"1.4.3","depth":2,"path":"skywalking/agent-settings.md","ref":"skywalking/agent-settings.md","articles":[]},"previous":{"title":"使用容器 Sidecar 的方式接入","level":"1.4.2.1","depth":3,"path":"skywalking/docker-sidecar.md","ref":"skywalking/docker-sidecar.md","articles":[]},"dir":"ltr"},"config":{"plugins":["tbfed-pagefooter","splitter","sitemap-general","-sharing","sharing-plus","github-buttons@2.1.0","edit-link@^2.0.2","favicon@^0.0.2","anchors","anchor-navigation-ex"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy www.daocloud.io 2019","modify_label":"修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://daocloud-labs.github.io/DMP-Public-Docs"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico","appleTouch":"favicon.ico","appleTouchMore":{"120x120":"favicon.ico","180x180":"favicon.ico"}},"github-buttons":{"repo":"DaoCloud-Labs/DMP-Public-Docs","types":["star","watch","fork"],"size":"small"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":true,"vk":false,"pocket":false,"google":true,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":true},"edit-link":{"label":"编辑本页","base":"https://github.com/DaoCloud-Labs/DMP-Public-Docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"DaoCloud NAT DMP Team","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","language":"zh-hans","links":{"sidebar":{"DaoCloud":"https://www.daocloud.io","DMP":"https://www.daocloud.io/dmp"}},"gitbook":"*","description":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","extension":null},"file":{"path":"skywalking/Python-agent.md","mtime":"2020-12-25T01:45:35.594Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-12-25T01:46:24.568Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Python 应用接入","level":"1.4.2.2","depth":3,"next":{"title":"3.2 探针参数说明","level":"1.4.3","depth":2,"path":"skywalking/agent-settings.md","ref":"skywalking/agent-settings.md","articles":[]},"previous":{"title":"使用容器 Sidecar 的方式接入","level":"1.4.2.1","depth":3,"path":"skywalking/docker-sidecar.md","ref":"skywalking/docker-sidecar.md","articles":[]},"dir":"ltr"},"config":{"plugins":["tbfed-pagefooter","splitter","sitemap-general","-sharing","sharing-plus","github-buttons@2.1.0","edit-link@^2.0.2","favicon@^0.0.2","anchors","anchor-navigation-ex"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy www.daocloud.io 2019","modify_label":"修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://daocloud-labs.github.io/DMP-Public-Docs"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico","appleTouch":"favicon.ico","appleTouchMore":{"120x120":"favicon.ico","180x180":"favicon.ico"}},"github-buttons":{"repo":"DaoCloud-Labs/DMP-Public-Docs","types":["star","watch","fork"],"size":"small"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":true,"vk":false,"pocket":false,"google":true,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":true},"edit-link":{"label":"编辑本页","base":"https://github.com/DaoCloud-Labs/DMP-Public-Docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"DaoCloud NAT DMP Team","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","language":"zh-hans","links":{"sidebar":{"DaoCloud":"https://www.daocloud.io","DMP":"https://www.daocloud.io/dmp"}},"gitbook":"*","description":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","extension":null},"file":{"path":"skywalking/Python-agent.md","mtime":"2020-12-25T01:58:52.222Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-12-25T01:59:41.914Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
