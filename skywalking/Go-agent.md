@@ -76,4 +76,4 @@ func main() {
 1. [go-micro](micro/README.md)
 1. [go-restful](go-restful/README.md)
 
-配合go2sky的插件，以上go的web开发包中定义的endpoints可以自动的接入到分布式链路追踪。
+配合go agent的插件，使用以上go web框架开发的endpoints可以自动接入到分布式链路追踪。
