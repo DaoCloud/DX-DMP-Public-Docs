@@ -25,6 +25,7 @@
   - 3.1 接入说明
      - [使用容器 Sidecar 的方式接入](skywalking/docker-sidecar.md)
      - [Python 应用接入](skywalking/Python-agent.md) 
+     - [Go 应用接入](skywalking/Go-agent.md) 
   - [3.2 探针参数说明](skywalking/agent-settings.md)
   - 3.3 高级功能
      - [告警对接](skywalking/alarm.md) 
