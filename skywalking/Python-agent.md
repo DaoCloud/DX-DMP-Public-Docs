@@ -1,6 +1,6 @@
 # Python 探针接入
 
-如果你的服务涉及到Python，可以参考该文档。本文以Flask应用为例讲解如何将Flask的endpoints接入到分布式链路追踪。
+如果你的服务涉及到 Python，可以参考该文档。本文以 Flask 应用为例讲解如何将 Flask 的endpoints 接入到分布式链路追踪。
 
 ## 前置条件
 
@@ -8,9 +8,9 @@
 
 * 环境 Python 3.7.9 
 
-* Python agent包被发布在[Pypi](https://pypi.org/project/apache-skywalking/),可以通过`pip`安装：
+* Python agent包被发布在[Pypi](https://pypi.org/project/apache-skywalking/), 你可以通过`pip`安装：
 
-```
+```bash
 #安装最新的版本并使用gRPC协议传输数据到OPA
 pip install "apache-skywalking"
 
@@ -65,8 +65,7 @@ Flask-Agent
 └── userRepo.py
 ```
 
-userRepo.py
-
+其中 **userRepo.py** 示例代码如下：
 ```python
 import json
 import time
@@ -90,7 +89,7 @@ class UserRepo:
         return user
 ```
 
-service.py
+其中 **service.py** 示例代码如下：
 
 ```python
 from UserRepo import UserRepo
@@ -102,7 +101,7 @@ class UserServce:
         return user
 ```
 
-app.py
+其中 **app.py** 示例代码如下：
 
 ```python
 from flask import Flask, url_for, request
@@ -130,22 +129,22 @@ def getUser():
 导入依赖库 Python agent SDK 需要SkyWalking 8.0+ and Python 3.5+
 参数说明：
 @ collector :SkyWalking 后端收集器地址
-@ service :服务名字
+@ service :服务名字, 以 @结尾代表该服务所在 DMP 租户。
 """
 from skywalking import agent, config
-config.init(collector='127.0.0.1:11800', service='python flask')
+config.init(collector='127.0.0.1:11800', service='python-flask@devTenant')
 agent.start()
 if __name__ == '__main__':
     app.run()
 ```
 
-python flask探针的接入需要随着flask应用一起启动，如上面代码的展示，此外还可以通过环境变量的方式进行配置信息设置。
+python flask 探针的接入需要随着 flask 应用一起启动，如上面代码的展示，此外还可以通过环境变量的方式进行配置信息设置。
 
 ## 支持的环境变量
 
 |      环境变量| 介绍     | 默认值     |
 | ---- | ---- | ---- |
-| PSW_AGENT_NAME                        | 在 DMP 链路追踪 UI 中展示的服务名。                          | `Python Service Name` |
+| PSW_AGENT_NAME                        | 在 DMP 链路追踪 UI 中展示的服务名。以 @结尾代表该服务所在 DMP 租户(比如  **python-flask@devTenant** 代表 **devTenant** 租户).                     | `Python Service Name` |
 | `SW_AGENT_INSTANCE` |DMP 链路追踪 UI 中展示的实例名。 | Randomly generated |
 | `SW_AGENT_COLLECTOR_BACKEND_SERVICES` | 后端Collector收集器的地址，通过逗号分割集群地址。 | `127.0.0.1:11800` |
 | `SW_AGENT_PROTOCOL` | 与后端OAP进行数据传输的协议： `http`, `grpc` or `kafka`,我们强烈建议在生产环境中使用`grpc`协议，它与`http`协议相比有更好的性能。 `kafka` 协议作为最后的选择使用 | `grpc` |
