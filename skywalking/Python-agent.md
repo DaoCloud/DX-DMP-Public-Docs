@@ -84,7 +84,10 @@ class UserRepo:
         pass
     def getUser(self,username):
         user = redisClient.r.get(username)
-        user = json.loads(user)
+        if user is None:
+            user = "no message";
+        else:
+            user = json.loads(user)
         time.sleep(0.5)
         return user
 ```
@@ -113,7 +116,6 @@ app = Flask(__name__)
 def hello_world():
     time.sleep(0.5)
     return "Hello_world"
-    # return 'Hello World!'
 
 @app.route("/user")
 def getUser():
