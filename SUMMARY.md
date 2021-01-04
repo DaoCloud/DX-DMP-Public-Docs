@@ -27,7 +27,7 @@
      - [Python 应用接入](skywalking/Python-agent.md) 
      - [Go 应用接入](skywalking/Go-agent.md) 
      - [Node.js应用接入](skywalking/Node.js-agent.md) 
-     - [DotNet应用接入](skywalking/DotNet-agent.md) 
+     - []()
   - [3.2 探针参数说明](skywalking/agent-settings.md)
   - 3.3 高级功能
      - [告警对接](skywalking/alarm.md) 

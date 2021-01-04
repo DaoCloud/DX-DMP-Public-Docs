@@ -25,7 +25,6 @@
 <url> <loc>https://daocloud-labs.github.io/skywalking/Python-agent.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>https://daocloud-labs.github.io/skywalking/Go-agent.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>https://daocloud-labs.github.io/skywalking/Node.js-agent.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
-<url> <loc>https://daocloud-labs.github.io/skywalking/DotNet-agent.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>https://daocloud-labs.github.io/skywalking/agent-settings.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>https://daocloud-labs.github.io/skywalking/alarm.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>https://daocloud-labs.github.io/skywalking/integration-log4j.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
