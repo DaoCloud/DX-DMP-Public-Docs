@@ -27,7 +27,8 @@
      - [Python 应用接入](skywalking/Python-agent.md) 
      - [Go 应用接入](skywalking/Go-agent.md) 
      - [Node.js应用接入](skywalking/Node.js-agent.md) 
-     - [Nginx Lua接入](skywalking/Nginx-agent.md)
+     - [Nginx-agent接入](skywalking/Nginx-agent.md)
+     - [Envoy接入](skywalking/Envoy-agent.md)
   - [3.2 探针参数说明](skywalking/agent-settings.md)
   - 3.3 高级功能
      - [告警对接](skywalking/alarm.md) 
