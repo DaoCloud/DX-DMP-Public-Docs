@@ -18,11 +18,13 @@ git clone https://github.com/apache/skywalking-nginx-lua.git
 
 你需要构建的目录结构：
 
+```
 your folder
 ├── skywalking-nginx-lua			#git拉取的lua gen仓库
 ├── nginx.conf
 ├── startup.sh
 └── docker-compose.yaml
+```
 
 具体的三个文件：
 
