@@ -118,3 +118,8 @@ admin:
 
 ```
 
+启动envoy
+```
+envoy -c envoy-swapm-demo.yaml
+```
+
