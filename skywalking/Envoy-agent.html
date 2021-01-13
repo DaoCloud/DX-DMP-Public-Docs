@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Go 应用接入 · DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册</title>
+        <title>Envoy接入 · DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -67,10 +67,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Node.js-agent.html" />
+    <link rel="next" href="agent-settings.html" />
     
     
-    <link rel="prev" href="Python-agent.html" />
+    <link rel="prev" href="Nginx-agent.html" />
     
 
     
@@ -523,7 +523,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2.3" data-path="Go-agent.html">
+        <li class="chapter " data-level="1.4.2.3" data-path="Go-agent.html">
             
                 <a href="Go-agent.html">
             
@@ -562,7 +562,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.6" data-path="Envoy-agent.html">
+        <li class="chapter active" data-level="1.4.2.6" data-path="Envoy-agent.html">
             
                 <a href="Envoy-agent.html">
             
@@ -898,7 +898,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Go 应用接入</a>
+        <a href=".." >Envoy接入</a>
     </h1>
 </div>
 
@@ -913,74 +913,114 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#go-&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>Go &#x63A2;&#x9488;&#x63A5;&#x5165;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><b></b>&#x524D;&#x7F6E;&#x6761;&#x4EF6;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><b></b>&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>&#x63A2;&#x9488;&#x63A5;&#x5165;</a></li><li><span class="title-icon "></span><a href="#&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;"><b></b>&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;</a></li></ul></ul></div><a href="#go-&#x63A2;&#x9488;&#x63A5;&#x5165;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="go-&#x63A2;&#x9488;&#x63A5;&#x5165;"><a name="go-&#x63A2;&#x9488;&#x63A5;&#x5165;" class="anchor-navigation-ex-anchor" href="#go-&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="go-&#x63A2;&#x9488;&#x63A5;&#x5165;" class="plugin-anchor" href="#go-&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>Go &#x63A2;&#x9488;&#x63A5;&#x5165;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x6D89;&#x53CA;&#x5230; Go&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8BE5;&#x6587;&#x6863;&#x3002;&#x672C;&#x6587;&#x4EE5; Go gin&#x5E94;&#x7528;&#x4E3A;&#x4F8B;&#x8BB2;&#x89E3;&#x5982;&#x4F55;&#x5C06; Gin &#x7684;endpoints &#x63A5;&#x5165;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x94FE;&#x8DEF;&#x8FFD;&#x8E2A;&#x3002;</p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#envoy&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>Envoy&#x63A2;&#x9488;&#x63A5;&#x5165;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><b></b>&#x524D;&#x7F6E;&#x6761;&#x4EF6;</a></li><ul><li><span class="title-icon "></span><a href="#&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><b></b>&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;</a></li></ul><li><span class="title-icon "></span><a href="#&#x63A2;&#x9488;&#x63A5;&#x5165;"><b></b>&#x63A2;&#x9488;&#x63A5;&#x5165;</a></li></ul></ul></div><a href="#envoy&#x63A2;&#x9488;&#x63A5;&#x5165;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="envoy&#x63A2;&#x9488;&#x63A5;&#x5165;"><a name="envoy&#x63A2;&#x9488;&#x63A5;&#x5165;" class="anchor-navigation-ex-anchor" href="#envoy&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="envoy&#x63A2;&#x9488;&#x63A5;&#x5165;" class="plugin-anchor" href="#envoy&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>Envoy&#x63A2;&#x9488;&#x63A5;&#x5165;</h1>
+<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x4F7F;&#x7528;envoy&#x4F5C;&#x4E3A;&#x7F51;&#x5173;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8BE5;&#x6587;&#x6863;&#x3002;&#x672C;&#x6587;&#x8BB2;&#x89E3;&#x5982;&#x4F55;&#x5C06; envoy &#x63A5;&#x5165;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x94FE;&#x8DEF;&#x8FFD;&#x8E2A;&#x3002;</p>
 <h2 id="&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><a name="&#x524D;&#x7F6E;&#x6761;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x524D;&#x7F6E;&#x6761;&#x4EF6;" class="plugin-anchor" href="#&#x524D;&#x7F6E;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x7F6E;&#x6761;&#x4EF6;</h2>
-<h3 id="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><a name="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;" class="plugin-anchor" href="#&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F9D;&#x8D56;&#x5305;&#x4E0E;&#x73AF;&#x5883;&#x5B89;&#x88C5;</h3>
+<h3 id="&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><a name="&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;" class="plugin-anchor" href="#&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x73AF;&#x5883;&#x5B89;&#x88C5;&#x914D;&#x7F6E;</h3>
+<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;(envoy1.17)&#x624D;&#x652F;&#x6301;&#x63A5;&#x5165;skywalking</em></p>
 <ul>
-<li><p>&#x73AF;&#x5883; go 1.15.4</p>
-</li>
-<li><p>Go agent&#x5305;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E0B;&#x65B9;&#x5F0F;&#x5B89;&#x88C5;&#xFF1A;</p>
-</li>
+<li>envoy 1.17&#xFF0C;<a href="https://www.envoyproxy.io/docs/envoy/latest/start/install#" target="_blank">envoy&#x5B89;&#x88C5;&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;</a>&#xFF1A;</li>
 </ul>
-<pre><code class="lang-bash">go get -u github.com/SkyAPM/go2sky
+<pre><code class="lang-bash">sudo yum install getenvoy-envoy
 </code></pre>
-<p>&#x672C;&#x6587;&#x6863;&#x793A;&#x4F8B;&#x4E2D;&#x5176;&#x4ED6;&#x5E93;&#x5B89;&#x88C5;&#xFF1A;</p>
-<pre><code>//go2sky&#x7684;gin&#x63D2;&#x4EF6;
-go get -u github.com/SkyAPM/go2sky-plugins/gin/v3
-go get -u github.com/gin-gonic/gin
+<ul>
+<li>skywalking 8&#x53CA;&#x4EE5;&#x4E0A;</li>
+</ul>
+<p>&#x786E;&#x4FDD;&#x4F60;&#x7684;envoy&#x662F;1.17&#x7248;&#xFF1A;</p>
+<pre><code>envoy --version
 </code></pre><h2 id="&#x63A2;&#x9488;&#x63A5;&#x5165;"><a name="&#x63A2;&#x9488;&#x63A5;&#x5165;" class="anchor-navigation-ex-anchor" href="#&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x63A2;&#x9488;&#x63A5;&#x5165;" class="plugin-anchor" href="#&#x63A2;&#x9488;&#x63A5;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x63A2;&#x9488;&#x63A5;&#x5165;</h2>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<ul>
+<li>envoy-swapm-demo.yaml</li>
+</ul>
+<pre><code class="lang-yaml"><span class="hljs-attr">static_resources:</span>
+<span class="hljs-attr">  listeners:</span>
+<span class="hljs-attr">  - name:</span> listener_0
+<span class="hljs-attr">    address:</span>
+<span class="hljs-attr">      socket_address:</span>
+<span class="hljs-attr">        address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">        port_value:</span> <span class="hljs-number">10000</span>
+<span class="hljs-attr">    filter_chains:</span>
+<span class="hljs-attr">    - filters:</span>
+<span class="hljs-attr">      - name:</span> envoy.filters.network.http_connection_manager
+<span class="hljs-attr">        typed_config:</span>
+          <span class="hljs-string">&quot;@type&quot;</span>: type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+<span class="hljs-attr">          stat_prefix:</span> ingress_http
+<span class="hljs-attr">          generate_request_id:</span> <span class="hljs-literal">true</span>
+          <span class="hljs-comment">#&#x4ECE;&#x8FD9;&#x91CC;&#x5F00;&#x59CB;&#x914D;&#x7F6E;&#x63A2;&#x9488;&#x63A5;&#x5165;</span>
+<span class="hljs-attr">          tracing:</span>
+<span class="hljs-attr">            provider:</span>
+<span class="hljs-attr">              name:</span> envoy.tracers.skywalking
+<span class="hljs-attr">              typed_config:</span>
+                <span class="hljs-string">&quot;@type&quot;</span>: type.googleapis.com/envoy.config.trace.v3.SkyWalkingConfig
+<span class="hljs-attr">                grpc_service:</span>
+<span class="hljs-attr">                  envoy_grpc:</span>
+<span class="hljs-attr">                    cluster_name:</span> skywalking
+<span class="hljs-attr">                  timeout:</span> <span class="hljs-number">0.250</span>s
+<span class="hljs-attr">                client_config:</span>
+                  <span class="hljs-comment">#service_name &#x4EE5; @&#x7ED3;&#x5C3E;&#x4EE3;&#x8868;&#x8BE5;&#x670D;&#x52A1;&#x6240;&#x5728; DMP &#x79DF;&#x6237;</span>
+                  <span class="hljs-comment">#instance_name &#x5B9E;&#x4F8B;&#x540D;&#x5B57;</span>
+<span class="hljs-attr">                  service_name:</span> front-envoy@devTenant
+<span class="hljs-attr">                  instance_name:</span> front-envoy<span class="hljs-bullet">-1</span>
+<span class="hljs-attr">          access_log:</span>
+<span class="hljs-attr">          - name:</span> envoy.access_loggers.file
+<span class="hljs-attr">            typed_config:</span>
+              <span class="hljs-string">&quot;@type&quot;</span>: type.googleapis.com/envoy.extensions.access_loggers.file.v3.FileAccessLog
+<span class="hljs-attr">              path:</span> /dev/stdout
+<span class="hljs-attr">          http_filters:</span>
+<span class="hljs-attr">          - name:</span> envoy.filters.http.router
+<span class="hljs-attr">          route_config:</span>
+<span class="hljs-attr">            name:</span> local_route
+<span class="hljs-attr">            virtual_hosts:</span>
+<span class="hljs-attr">            - name:</span> local_service
+<span class="hljs-attr">              domains:</span> [<span class="hljs-string">&quot;*&quot;</span>]
+<span class="hljs-attr">              routes:</span>
+<span class="hljs-attr">              - match:</span>
+<span class="hljs-attr">                  prefix:</span> <span class="hljs-string">&quot;/&quot;</span>
+<span class="hljs-attr">                route:</span>
+<span class="hljs-attr">                  host_rewrite_literal:</span> www.envoyproxy.io
+<span class="hljs-attr">                  cluster:</span> service_envoyproxy_io
 
-<span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;log&quot;</span>
-    <span class="hljs-string">&quot;github.com/SkyAPM/go2sky&quot;</span>
-    v3 <span class="hljs-string">&quot;github.com/SkyAPM/go2sky-plugins/gin/v3&quot;</span>
-    <span class="hljs-string">&quot;github.com/SkyAPM/go2sky/reporter&quot;</span>
-    <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span>
-)
-
-<span class="hljs-keyword">func</span> main() {
-    <span class="hljs-comment">/*
-    &#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;
-    @serverAddr:SkyWalking &#x540E;&#x7AEF;&#x6536;&#x96C6;&#x5668;&#x5730;&#x5740;
-    */</span>
-    re, err := reporter.NewGRPCReporter(<span class="hljs-string">&quot;172.16.200.201:11800&quot;</span>)
-    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        log.Fatalf(<span class="hljs-string">&quot;new reporter error %v \n&quot;</span>, err)
-    }
-    <span class="hljs-keyword">defer</span> re.Close()
-    <span class="hljs-comment">/*
-    &#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;
-    @service &#x670D;&#x52A1;&#x540D;&#x5B57;, &#x4EE5; @&#x7ED3;&#x5C3E;&#x4EE3;&#x8868;&#x8BE5;&#x670D;&#x52A1;&#x6240;&#x5728; DMP &#x79DF;&#x6237;&#x3002;
-    @opts &#x56FA;&#x5B9A;&#x683C;&#x5F0F;&#xFF0C;&#x4E00;&#x4E2A;Reporter&#x7684;&#x5B9E;&#x4F8B;
-    */</span>
-    tracer, err := go2sky.NewTracer(<span class="hljs-string">&quot;go-gin@devTenant&quot;</span>, go2sky.WithReporter(re))
-    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        log.Fatalf(<span class="hljs-string">&quot;create tracer error %v \n&quot;</span>, err)
-    }
-    gin.SetMode(gin.ReleaseMode)
-    r := gin.New()
-
-    <span class="hljs-comment">//gin&#x52A0;&#x8F7D;go2sky&#x7684;&#x4E2D;&#x95F4;&#x4EF6;(&#x63D2;&#x4EF6;)&#x5B9E;&#x73B0;&#x8DEF;&#x5F84;&#x8FFD;&#x8E2A;</span>
-    r.Use(v3.Middleware(r, tracer))
-    r.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-keyword">func</span>(c *gin.Context) {
-        c.JSON(<span class="hljs-number">200</span>, gin.H{
-            <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;hi gin&quot;</span>,
-        })
-    })
-    r.Run()
-}
+<span class="hljs-attr">  clusters:</span>
+<span class="hljs-attr">  - name:</span> skywalking
+<span class="hljs-attr">    connect_timeout:</span> <span class="hljs-number">1</span>s
+<span class="hljs-attr">    type:</span> strict_dns
+<span class="hljs-attr">    lb_policy:</span> round_robin
+<span class="hljs-attr">    http2_protocol_options:</span> {}
+<span class="hljs-attr">    load_assignment:</span>
+<span class="hljs-attr">      cluster_name:</span> skywalking
+<span class="hljs-attr">      endpoints:</span>
+<span class="hljs-attr">      - lb_endpoints:</span>
+<span class="hljs-attr">        - endpoint:</span>
+<span class="hljs-attr">            address:</span>
+<span class="hljs-attr">              socket_address:</span>
+                <span class="hljs-comment"># &#x4F60;&#x7684;skywaling opa&#x5730;&#x5740;&#x4E0E;&#x7AEF;&#x53E3;&#x914D;&#x7F6E;</span>
+<span class="hljs-attr">                address:</span> <span class="hljs-number">172.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>
+<span class="hljs-attr">                port_value:</span> <span class="hljs-number">11800</span>
+<span class="hljs-attr">  - name:</span> service_envoyproxy_io
+<span class="hljs-attr">    connect_timeout:</span> <span class="hljs-number">30</span>s
+<span class="hljs-attr">    type:</span> LOGICAL_DNS
+<span class="hljs-attr">    dns_lookup_family:</span> V4_ONLY
+<span class="hljs-attr">    load_assignment:</span>
+<span class="hljs-attr">      cluster_name:</span> service_envoyproxy_io
+<span class="hljs-attr">      endpoints:</span>
+<span class="hljs-attr">      - lb_endpoints:</span>
+<span class="hljs-attr">        - endpoint:</span>
+<span class="hljs-attr">            address:</span>
+<span class="hljs-attr">              socket_address:</span>
+<span class="hljs-attr">                address:</span> www.envoyproxy.io
+<span class="hljs-attr">                port_value:</span> <span class="hljs-number">443</span>
+<span class="hljs-attr">    transport_socket:</span>
+<span class="hljs-attr">      name:</span> envoy.transport_sockets.tls
+<span class="hljs-attr">      typed_config:</span>
+        <span class="hljs-string">&quot;@type&quot;</span>: type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+<span class="hljs-attr">        sni:</span> www.envoyproxy.io
+<span class="hljs-attr">admin:</span>
+<span class="hljs-attr">  access_log_path:</span> /dev/<span class="hljs-literal">null</span>
+<span class="hljs-attr">  address:</span>
+<span class="hljs-attr">    socket_address:</span>
+<span class="hljs-attr">      address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">      port_value:</span> <span class="hljs-number">9901</span>
 </code></pre>
-<h2 id="&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;"><a name="&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;" class="plugin-anchor" href="#&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5176;&#x4ED6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x7684;&#x63D2;&#x4EF6;&#xFF1A;</h2>
-<ol>
-<li><a href="http/README.md">http server &amp; client</a></li>
-<li><a href="gear/README.md">gear</a></li>
-<li><a href="resty/README.md">go-resty</a></li>
-<li><a href="micro/README.md">go-micro</a></li>
-<li><a href="go-restful/README.md">go-restful</a></li>
-</ol>
-<p>&#x914D;&#x5408;go agent&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x4EE5;&#x4E0A;go web&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;endpoints&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x63A5;&#x5165;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x94FE;&#x8DEF;&#x8FFD;&#x8E2A;&#x3002; </p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; www.daocloud.io 2019 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
 2021-01-13 07:49:33
 </span></footer>
@@ -1010,12 +1050,12 @@ go get -u github.com/gin-gonic/gin
 
             
                 
-                <a href="Python-agent.html" class="navigation navigation-prev " aria-label="Previous page: Python 应用接入">
+                <a href="Nginx-agent.html" class="navigation navigation-prev " aria-label="Previous page: Nginx-agent接入">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Node.js-agent.html" class="navigation navigation-next " aria-label="Next page: Node.js应用接入">
+                <a href="agent-settings.html" class="navigation navigation-next " aria-label="Next page: 3.2 探针参数说明">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1026,7 +1066,7 @@ go get -u github.com/gin-gonic/gin
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Go 应用接入","level":"1.4.2.3","depth":3,"next":{"title":"Node.js应用接入","level":"1.4.2.4","depth":3,"path":"skywalking/Node.js-agent.md","ref":"skywalking/Node.js-agent.md","articles":[]},"previous":{"title":"Python 应用接入","level":"1.4.2.2","depth":3,"path":"skywalking/Python-agent.md","ref":"skywalking/Python-agent.md","articles":[]},"dir":"ltr"},"config":{"plugins":["tbfed-pagefooter","splitter","sitemap-general","-sharing","sharing-plus","github-buttons@2.1.0","edit-link@^2.0.2","favicon@^0.0.2","anchors","anchor-navigation-ex"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy www.daocloud.io 2019","modify_label":"修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://daocloud-labs.github.io/DMP-Public-Docs"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico","appleTouch":"favicon.ico","appleTouchMore":{"120x120":"favicon.ico","180x180":"favicon.ico"}},"github-buttons":{"repo":"DaoCloud-Labs/DMP-Public-Docs","types":["star","watch","fork"],"size":"small"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":true,"vk":false,"pocket":false,"google":true,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":true},"edit-link":{"label":"编辑本页","base":"https://github.com/DaoCloud-Labs/DMP-Public-Docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"DaoCloud NAT DMP Team","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","language":"zh-hans","links":{"sidebar":{"DaoCloud":"https://www.daocloud.io","DMP":"https://www.daocloud.io/dmp"}},"gitbook":"*","description":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","extension":null},"file":{"path":"skywalking/Go-agent.md","mtime":"2021-01-13T07:49:33.325Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T07:50:20.193Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Envoy接入","level":"1.4.2.6","depth":3,"next":{"title":"3.2 探针参数说明","level":"1.4.3","depth":2,"path":"skywalking/agent-settings.md","ref":"skywalking/agent-settings.md","articles":[]},"previous":{"title":"Nginx-agent接入","level":"1.4.2.5","depth":3,"path":"skywalking/Nginx-agent.md","ref":"skywalking/Nginx-agent.md","articles":[]},"dir":"ltr"},"config":{"plugins":["tbfed-pagefooter","splitter","sitemap-general","-sharing","sharing-plus","github-buttons@2.1.0","edit-link@^2.0.2","favicon@^0.0.2","anchors","anchor-navigation-ex"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy www.daocloud.io 2019","modify_label":"修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://daocloud-labs.github.io/DMP-Public-Docs"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico","appleTouch":"favicon.ico","appleTouchMore":{"120x120":"favicon.ico","180x180":"favicon.ico"}},"github-buttons":{"repo":"DaoCloud-Labs/DMP-Public-Docs","types":["star","watch","fork"],"size":"small"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":true,"vk":false,"pocket":false,"google":true,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":true},"edit-link":{"label":"编辑本页","base":"https://github.com/DaoCloud-Labs/DMP-Public-Docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"DaoCloud NAT DMP Team","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","language":"zh-hans","links":{"sidebar":{"DaoCloud":"https://www.daocloud.io","DMP":"https://www.daocloud.io/dmp"}},"gitbook":"*","description":"DaoCloud MicroService Platform 用户接入指南/DMP 微服务架构实践手册","extension":null},"file":{"path":"skywalking/Envoy-agent.md","mtime":"2021-01-13T07:49:33.325Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T07:50:20.193Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
