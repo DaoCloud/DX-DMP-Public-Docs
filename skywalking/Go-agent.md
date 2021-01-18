@@ -47,10 +47,10 @@ func main() {
 	defer re.Close()
 	/*
 	参数说明：
-	@service 服务名字, 以 @结尾代表该服务所在 DMP 租户。
+	@service 服务名字, 规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。
 	@opts 固定格式，一个Reporter的实例
 	*/
-	tracer, err := go2sky.NewTracer("go-gin@devTenant", go2sky.WithReporter(re))
+	tracer, err := go2sky.NewTracer("devTenant::dmp-t::go-gin-test", go2sky.WithReporter(re))
 	if err != nil {
 		log.Fatalf("create tracer error %v \n", err)
 	}

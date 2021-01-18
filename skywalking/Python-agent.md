@@ -146,7 +146,7 @@ python flask 探针的接入需要随着 flask 应用一起启动，如上面代
 
 |      环境变量| 介绍     | 默认值     |
 | ---- | ---- | ---- |
-| PSW_AGENT_NAME                        | 在 DMP 链路追踪 UI 中展示的服务名。以 @结尾代表该服务所在 DMP 租户(比如  **python-flask@devTenant** 代表 **devTenant** 租户).                     | `Python Service Name` |
+| PSW_AGENT_NAME                        | 在 DMP 链路追踪 UI 中展示的服务名。规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。(比如  **devTenant::system::python-flask** 代表 **devTenant** 租户, **system** 命名空间).                     | `Python Service Name` |
 | `SW_AGENT_INSTANCE` |DMP 链路追踪 UI 中展示的实例名。 | Randomly generated |
 | `SW_AGENT_COLLECTOR_BACKEND_SERVICES` | 后端Collector收集器的地址，通过逗号分割集群地址。 | `127.0.0.1:11800` |
 | `SW_AGENT_PROTOCOL` | 与后端OAP进行数据传输的协议： `http`, `grpc` or `kafka`,我们强烈建议在生产环境中使用`grpc`协议，它与`http`协议相比有更好的性能。 `kafka` 协议作为最后的选择使用 | `grpc` |

@@ -27,14 +27,14 @@ npm install express --save
 ```javascript
 /*
 参数说明：
-@serviceName 服务名字, 以@结尾代表该服务所在 DMP 租户。
+@serviceName 服务名字, 规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。
 @instanceName 实例名字
 @directServers SkyWalking后端收集器地址(使用gRPC 协议传输数据)
 注意：
 	在你使用其他module之前，必须先启动 skyapm-nodejs，否则无法收集数据
 */
 require('skyapm-nodejs').start({
-    serviceName: 'express-demo@devTenant',
+    serviceName: 'devTenant::dmp-t::express-demo',
     instanceName: 'test',
     directServers: '172.16.200.201:11800'
 });
