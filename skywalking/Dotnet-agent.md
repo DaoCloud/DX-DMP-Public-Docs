@@ -66,7 +66,7 @@ dotnet add package SkyAPM.Agent.AspNetCore
    }
    ```
 
-   配置文件解释见“**重要配置解释**”部分
+   配置文件解释：[**重要配置解释**](#重要配置解释)
 
 3. 设置环境变量
 
@@ -80,14 +80,7 @@ dotnet add package SkyAPM.Agent.AspNetCore
 
 ## 现在已经支持的库
 
-- [ASP.NET Core](https://github.com/dotnet/aspnetcore)
-- [.NET Core BCL types (HttpClient and SqlClient)](https://github.com/dotnet/runtime) 
-- [EntityFrameworkCore](https://github.com/dotnet/efcore)
-- [EntityFrameworkCore.Sqlite](https://github.com/dotnet/efcore)
-- [Npgsql.EntityFrameworkCore.PostgreSQL](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)
-- [Pomelo.EntityFrameworkCore.MySql](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)
-- [CAP](https://github.com/dotnetcore/CAP)
-- ASP.NET
+- [支持列表](https://github.com/SkyAPM/SkyAPM-dotnet/blob/master/docs/Supported-list.md)
 
 配合dotnet agent，以上库可以自动接入到分布式链路追踪。
 
