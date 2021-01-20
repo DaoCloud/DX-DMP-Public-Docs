@@ -29,6 +29,7 @@
      - [Node.js应用接入](skywalking/Node.js-agent.md) 
      - [Nginx-agent接入](skywalking/Nginx-agent.md)
      - [Envoy接入](skywalking/Envoy-agent.md)
+     - [Dotnet接入](skywalking/Dotnet-agent.md)
   - [3.2 探针参数说明](skywalking/agent-settings.md)
   - 3.3 高级功能
      - [告警对接](skywalking/alarm.md) 
