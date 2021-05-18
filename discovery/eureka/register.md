@@ -1,3 +1,3 @@
-# 服务注册
+# Service Registration
 
-服务注册与发现，其实分为2个部分，第一部分，我们需要将应用实例注册到`Eureka Server`之上，可供`Eureka Client`或者是通过 `Restful` 接口获取。
+Service registration and discovery, in fact, is divided into 2 parts, the first part, we need to register the application instance on top of `Eureka Server`, available for `Eureka Client` or through the `Restful` interface.

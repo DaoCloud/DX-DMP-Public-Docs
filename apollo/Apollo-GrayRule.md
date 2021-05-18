@@ -1,29 +1,29 @@
-# 配置中心灰度发布使用指南
-> 灰度发布是指在黑与白之间，能够平滑过渡的一种发布方式。A/B Test就是一种灰度发布方式，让一部用户继续用A，一部分用户开始用B，如果用户对B没有什么反对意见，那么逐步扩大范围，把所有用户都迁移到B上面 来。灰度发布可以保证整体系统的稳定，在初始灰度的时候就可以发现、调整问题，以保证其影响度。
+# Configuration Center Grayscale Release Usage Guide
+> A/B Test is a kind of grayscale release, allowing some users to continue using A and some users to start using B. If users have no objection to B, then gradually expand the scope and migrate all users to B. Grayscale release can ensure the stability of the overall system, and problems can be identified and adjusted during the initial grayscale to ensure its impact.
 
-通过灰度发布功能，可以实现：
+With the gray release feature, it is possible to
 
-- 对于一些对程序有比较大影响的配置，可以先在一个或者多个实例生效，观察一段时间没问题后再全量发布配置。
-- 对于一些需要调优的配置参数，可以通过灰度发布功能来实现`A/B`测试。可以在不同的机器上应用不同的配置，不断调整、测评一段时间后找出较优的配置再全量发布配置。
+- For some configurations that have a relatively large impact on the program, they can take effect in one or more instances first, and observe no problems for a period of time before releasing the configuration in full.
+- For some configuration parameters that need to be tuned, `A/B` testing can be achieved through the grayscale release function. You can apply different configurations on different machines and keep tuning and evaluating for a period of time to find out the better configuration before releasing the configuration in full.
 
-下面将结合一个实际例子来描述如何使用灰度发布功能。
+The following is a practical example to describe how to use the grayscale release function.
 
-## 操作流程介绍
-- 在配置中心创建配置组
-- 在配置组中创建一个命名空间
-- 为创建的命名空间添加灰度规则
-- 添加灰度配置
-- 灰度发布
-- [灰度的]全量发布
+## Introduction to the operation process
+- Create a configuration group in the configuration center
+- Create a namespace in the configuration group
+- Add grayscale rules to the created namespace
+- Add a grayscale configuration
+- Grayscale publishing
+- Full [grayscale] release
 
-### 1 创建配置组
-配置中心配置组中存在着一个`appId=HoUoWWqxRj.apollo_gray`配置组：
+### 1 Create a configuration group
+There is an `appId=HoUoWWqxRj.apollo_gray` configuration group in the Configuration Center configuration group：
 ![HoUoWWqxRj.apollo_gray](img/gray-1.png)
 
-### 2 创建命名空间
-在创建配置组之后，默认会创建一个`application`命名空间。
-可以在此空间中添加配置，此时的配置被称为`主版本`配置。
-比如:
+### 2 Creating namespaces
+After creating a configuration group, an `application` namespace is created by default.
+You can add configurations to this space, which at this point are called `master version` configurations.
+For example:
 
 ```bash
 timeout = 2000
@@ -31,44 +31,44 @@ timeout = 2000
 
 ![HoUoWWqxRj.apollo_gray](img/timeout-2000.png)
 
-### 3 创建灰度
+### 3 Create grayscale
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config.png)
-点击确定后，灰度版本就创建成功了，页面会自动切换到`灰度版本Tab`。
-创建完灰度分支之后，会发现底部出现了主版本的配置，此时，可以通过右下角的操作按钮来对该配置进行灰度覆盖，以此创建出灰度值。你也可以直接添加新的灰度配置(key=value)。
+Once you click OK, the grayscale version is created successfully and the page will automatically switch to the `Grayscale Version Tab`.
+After creating the grayscale branch, you will find the configuration of the main version appears at the bottom. At this point, you can create a grayscale value by overwriting that configuration with grayscale by using the action button at the bottom right corner. You can also add a new grayscale configuration directly (key=value).
 
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-2.png)
 
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-3.png)
 
-随后进行`灰度发布`。
+This was followed by a `gray release`.
 
-### 4 创建灰度规则
-点击`编辑规则`,在实例IP列表下拉框中会默认展示当前使用配置的机器列表，选择我们要灰度的IP，点击完成。如果下拉框中没找到需要的IP，说明机器还没从配置中心取过配置，可以点击手动输入IP来输入。
+### 4 Create grayscale rules
+Click `Edit Rule`, in the Instance IP list drop-down box will show the list of machines currently using the configuration by default, select the IP we want to gray out and click Finish. If you don't find the IP you need in the drop-down box, it means the machine hasn't taken the configuration from the configuration center yet, you can enter it by clicking Manual IP Input.
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-4.png)
 
-### 5 灰度发布
-配置规则已经生效，不过灰度配置还没有发布。切换到配置Tab。
+### 5 Grayscale Release
+The configuration rules are in effect, but the grayscale configuration has not been published yet. Switch to the Configuration Tab.
 
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-5.png)
 
-### 5 实例拉取配置
-客户端接入以及如何拉取配置可参考前面[通过注解方式开启](annotation.md)、[通过配置文件开启](bootstrap.md)介绍。
-当客户端拉取配置的时候IP和灰度规则列表中的匹配，则客户端会拉取该灰度配置，并出现在灰度实例列表中。
-比如：
+### 5 Instance pulling configuration
+Client access and how to pull configuration can be referred to the previous [open by annotation](annotation.md), [open by configuration file](bootstrap.md) introduction.
+When the client pulls the configuration when the IP and the grayscale rules list match, the client will pull the grayscale configuration and appear in the grayscale instance list.
+For example：
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-6.png)
 
-### 6 [灰度的]全量发布
+### 6 [Grayscale's] Full Volume Release
 
-如果灰度的配置测试下来比较理想，符合预期，那么就可以操作`全量发布`。
+If the grayscale configuration tests down ideally and meets expectations, then you can operate the `full release`.
 
-全量发布的效果是：
+The effect of a full release is that
 
-- 灰度版本的配置会合并回主版本，在这个例子中，就是主版本的`timeout `会被更新成`1000`.
-- 主版本的配置会自动进行一次发布
-- 在全量发布页面，可以选择是否保留当前灰度版本，`默认为不保留`。
+- The grayed-out version of the configuration is merged back into the main version, which in this case means that the `timeout ` of the main version is updated to `1000`.
+- The main version of the configuration will be automatically published once
+- On the full release page, you can choose whether to keep the current grayscale version, `default is `not keep`.
 
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-7.png)
 
-### 7 放弃灰度
-如果灰度版本不理想或者不需要了，可以点击`放弃灰度`。
+### 7 Discard grayscale
+If the grayscale version is not satisfactory or not needed anymore, you can click `Discard Grayscale`.
 ![HoUoWWqxRj.apollo_gray](img/crete-gray-config-8.png)

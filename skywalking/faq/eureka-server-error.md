@@ -1,10 +1,10 @@
-# 为什么服务加上探针就注册不了Eureka Server?
+# Why can't the service register with Eureka Server if it adds a probe??
 
-首先确定是否和如下现象一致。
+First determine if the phenomenon is consistent with the following.
 
-## 现象
+## Phenomenon
 
-服务不加探针之前能够正常注册到 Eureka Server，加上探针之后就注册不了并伴随如下错误信息：
+The service can register to Eureka Server normally before adding the probe, but after adding the probe it fails to register with the following error message：
 
 ```bash
 ······
@@ -35,6 +35,6 @@ java.lang.IllegalArgumentException: The HTTP header line [""-sw6: 1-NDIuMS4xNTU5
         at org.apache.coyote.http11.Http11InputBuffer.skipLine(Http11InputBuffer.java:953) ~[tomcat-embed-core-9.0.12.jar:9.0.12]
 ```
 
-## 解决办法
+## Solutions
 
-- 请检查是否为探针传了`SW_AGENT_NAMESPACE`变量并将其值设置成了`租户Code`.
+- Please check if the `SW_AGENT_NAMESPACE` variable was passed to the probe and its value was set to `TENANT CODE`.

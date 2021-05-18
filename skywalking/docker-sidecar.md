@@ -1,18 +1,18 @@
-# 基于容器Sidecar的方式接入（最佳实践）
+# Access by way of container-based Sidecar (best practice)
 
-如果你的服务采用容器部署的话，可以参考该文档。本文档讲解了如何通过`daoshop-user-center`的 kubernetes 部署 YAML 文件讲解 Sidecar 的方式接入分布式链路追踪。本文采用 DaoCloud 发布的 Sidecar 镜像包为例。
+You can refer to this document if your service is deployed with containers. This document explains how to access distributed link tracking by means of a kubernetes deployment YAML file for `daoshop-user-center` that explains Sidecar. This article uses the Sidecar image package released by DaoCloud as an example.
 
-## 前置条件
+## Prerequisites
 
-- 能够拉取/下载 DaoCloud 发布的链路追踪 Agent Sidecar 镜像。
+- The ability to pull/download the DaoCloud published link tracking agent Sidecar image.
 
-## 步骤
+## Steps
 
-#### 拉取镜像
+#### Pull the image
 
-### 编排文件参考
+### Orchestration file reference
 
-主要利用了 Kubernetes 的 initContainer 机制，更多请参考: [https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/)
+The main use of the Kubernetes initContainer mechanism, see more: [https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/)
 
 ```yml
 
@@ -60,7 +60,7 @@ spec:
             - name: sidecar
               mountPath: /sidecar
       volumes:
-        - name: sidecar  #共享agent文件夹
+        - name: sidecar  #Shared agent folder
           emptyDir: {}
 ---
 apiVersion: v1
@@ -76,12 +76,12 @@ spec:
 
 ```
 
-- ➊ 将带有Agent的镜像中的探针拷贝到共享目录。
-- ➋ 使用`-javaagent`参数指定 Skywalking 探针的路径。
+- ➊ Copy the probes from the image with the Agent to the shared directory.
+- ➋ Use the `-javaagent` parameter to specify the path to the Skywalking probe.
 
-注意⚠️：探针所需相关环境变量均会通过DX部署的时候传入容器。
+Attention⚠️：The relevant environment variables required by the probe are passed into the container during DX deployment.
 
-### 更多环境变量
+### More environment variables
 
- 可以参考[探针参数配置](agent-settings.md), DaoShop `daoshop-product`服务中接入的[Dockerfile](https://github.com/DaoCloud-Labs/daoshop-product/blob/master/Dockerfile)、DaoShop `daoshop-order`服务中接入的[Dockerfile](https://github.com/DaoCloud-Labs/daoshop-order/blob/master/Dockerfile).
+ You can refer to [probe parameters configuration](agent-settings.md), [Dockerfile](https://github.com/DaoCloud-Labs/daoshop-product/blob) accessed in DaoShop `daoshop-product` service, [Dockerfile](https://github.com/DaoCloud-Labs/daoshop-product/blob /master/Dockerfile), [Dockerfile] accessed in DaoShop `daoshop-order` service (https://github.com/DaoCloud-Labs/daoshop-order/blob/master/ Dockerfile).
  

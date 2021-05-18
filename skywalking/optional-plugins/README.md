@@ -1,5 +1,5 @@
-# 使用可选插件
-插件包里面包含了一个`optional-plugins`目录，里面包含了一些在特定场景下不是必须的、可能会影响性能的插件。目录结构如下：
+# Using the optional plug-in
+The plug-in package contains an `optional-plugins` directory, which contains some plug-ins that are not required in specific scenarios and may affect performance. The directory structure is as follows:
 
 ```
 +-- agent
@@ -22,13 +22,13 @@
     
 ```
 
-## 如何使用
+## How to use
 
-这里以`Resis Client`的`Lettuce 5.x`插件为例。
+Here is an example of the `Lettuce 5.x` plugin for `Resis Client`.
 
-使用起来非常简单：“将`optional-plugins`目录下的相关插件拷贝到`plugins目录即可`”😄.
+It's very easy to use: "Just copy the relevant plugins from the `optional-plugins` directory to the `plugins` directory`"😄.
 
-## 在初始化容器中添加 CMD 进行操作
+## Add CMD to the initialization container for operation
 
 ```yml
 apiVersion: apps/v1
@@ -97,7 +97,7 @@ spec:
             - name: sidecar
               mountPath: /sidecar
       volumes:
-        - name: sidecar  #共享agent文件夹
+        - name: sidecar  #Shareagent folder
           emptyDir: {}
 ---
 apiVersion: v1
@@ -116,7 +116,7 @@ spec:
 
 ```
 
-- ➊ 将`lettuce-5.x`插件拷贝至`plugins`目录下
+- ➊ Copy the `lettuce-5.x` plugin to the `plugins` directory
 
 
 

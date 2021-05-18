@@ -1,15 +1,15 @@
-# 无客户端 SDK 服务发现
+# Clientless SDK service discovery
 
-针对一些非 `JVM` 的语言，又无 `SDK` 的实现。最终可以选择最为简单的 `Http API` 的方式进行服务表的获取。
+For languages that are not `JVM` and have no `SDK` implementation. Eventually the simplest way to get the service table is to use the `Http API`.
 
-## 获取所有的注册服务
+## Get all registered services
 
 ```bash
 curl --request GET \
   --url http://${YOUR_EUREKA_ADDRESS}/eureka/v2/apps \
 ```
 
-会获得形如以下的 `XML` 格式的报文返回：
+A message in the following `XML` format will be returned：
 
 ```xml
 <applications>
@@ -55,26 +55,26 @@ curl --request GET \
 </applications>
 ```
 
-其中的 `<application>` 标签内是服务，由多个`<instance>`构成，`<instance>`中 `<ipAddr>`与`<port>` 即是服务实例的地址所在。
+The `<application>` tag contains the service, which consists of multiple `<instance>`s, and the `<ipAddr>` and `<port>` in the `<instance>` are the addresses of the service instances.
 
-### 查询单个服务的实例列表
+### Query the list of instances of a single service
 
 ```bash
 curl --request GET \
   --url http://${YOUR_EUREKA_ADDRESS}/eureka/v2/apps/{YOUR_APP_ID} \
 ```
 
-结果同上
+Results as above
 
-### 查询单个服务的单个实例信息
+### Query information about a single instance of a single service
 
 ```bash
 curl --request GET \
   --url http://${YOUR_EUREKA_ADDRESS}/eureka/v2/apps/{YOUR_APP_ID}/{YOUR_INSTANCE_ID} \
 ```
 
-结果同上
+Results as above
 
-## 附录
+## Appendix
 
 - [Eureka Restful API](https://github.com/Netflix/eureka/wiki/Eureka-REST-operations)

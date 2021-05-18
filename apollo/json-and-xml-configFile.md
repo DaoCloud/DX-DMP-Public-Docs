@@ -1,34 +1,34 @@
-# json/xml 配置文件操作文档
+# json/xml configuration file manipulation documentation
 
-在引入了apollo-client的情况下在需要的地方加入如下代码获取xml以及json文件
+If apollo-client is introduced, add the following code to get the xml and json files where needed
 
-1.获取xml类型的配置文件
+1.Get the xml type configuration file
 
 ```
-//获取datasources.xml文件
+//get the datasources.xml file
 xmlConfigFile = ConfigService.getConfigFile("datasources",ConfigFileFormat.XML);
-//添加监听器
+// Add a listener
 xmlConfigFile.addChangeListener(new ConfigFileChangeListener() {
   @Override
   public void onChange(ConfigFileChangeEvent changeEvent) {
     logger.info(changeEvent.toString());
   }
 });
-xmlConfigFile.getContent(); //获取xml的配置内容
-...业务处理
+xmlConfigFile.getContent();  // Get the configuration content of the xml
+... Business Processing
 ```
 
-2.获取json类型的配置文件
+2.Get the configuration file of json type
 ```
-//获取datasources.json文件
+//Get the datasources.json file
 jsonConfigFile = ConfigService.getConfigFile("datasources",ConfigFileFormat.JSON);
-//添加监听器
+// Add a listener
 jsonConfigFile.addChangeListener(new ConfigFileChangeListener() {
   @Override
   public void onChange(ConfigFileChangeEvent changeEvent) {
     logger.info(changeEvent.toString());
   }
 });
-jsonConfigFile.getContent(); //获取json的配置内容
-....业务处理
+jsonConfigFile.getContent(); // Get the configuration content of json
+.... Business Processing
 ```

@@ -1,5 +1,5 @@
 # FAQ
 
 
-- [为什么服务加上探针就注册不了Eureka Server?](eureka-server-error.md)
+- [Why can't the service register with Eureka Server if it adds a probe?](eureka-server-error.md)
 

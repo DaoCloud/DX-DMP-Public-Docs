@@ -1,20 +1,20 @@
-# 服务注册与发现介绍
+# Introduction to Service Registration and Discovery
 
-本章主要介绍的是如何实现服务的注册与发现。
+This chapter focuses on how to implement the registration and discovery of services.
 
-## 版本
+## Versions
 
-- 平台内置 Spring Cloud Netflix Eureka Server: `2.0.1.RELEASE`
-- 客户端 Spring Cloud Starter Netflix Eureka Client: `>= 1.4.1.RELEASE`
+- Platform built-in Spring Cloud Netflix Eureka Server: `2.0.1.RELEASE`
+- Client Spring Cloud Starter Netflix Eureka Client: `>= 1.4.1.RELEASE`
 
-## 介绍
+## Introduction
 
-通常来说服务注册与发现包括两部分，一个是服务器端，另一个是客户端。Server 是一个公共的服务，为 Client 提供服务注册和发现的功能，维护注册到自身的 Client 的相关信息，同时提供接口给 Client 获取注册表中其他服务的信息，使得动态变化的 Client 能够进行服务间的调用。Client 将自己的服务信息通过一定的方式登记到 Server 上，并在正常范围内维护自己信息一致性，方便其他服务发现自己，同时可以通过 Server 获取到自己依赖的其他服务信息，完成服务调用。
+Generally speaking, service registration and discovery include two parts, one is the Server and the other is the Client. Server is a public service that provides service registration and discovery functions for the Client, maintains information about the Client registered to itself, and at the same time provides an interface for the Client to obtain information about other services in the registry, so that the dynamically changing Client can invoke between services. The Client registers its own service information to the Server in a certain way and maintains its own information consistency within the normal scope to facilitate other services to discover itself, and at the same time, it can get information of other services it depends on through the Server to complete service invocation.
 
-Spring Cloud Netflix Eureka 是 Spring Cloud 提供用于服务发现和注册的基础组件，是搭建 Spring Cloud 微服务架构的前提之一。Eureka 作为一个开箱即用的基础组件，屏蔽了底层 Server 和 Client 交互的细节，使得开发者能够将精力更多地放在业务逻辑上，加快为服务架构的实施和项目的开发。
+Spring Cloud Netflix Eureka is a basic component provided by Spring Cloud for service discovery and registration, and is one of the prerequisites for building Spring Cloud microservices architecture. This allows developers to focus more on the business logic and accelerate the implementation of the service architecture and project development.
 
-在 Netfilx 中，Eureka 是一个 RESTful 风格的服务注册与发现的基础服务组件。Eureka 由两部分组成，一个是 Eureka Server，提供服务注册和发现功能，即我们上面说的服务端；另一个是 Eureka Client，它简化了客户端与服务端之间的交互。Eureka Client 会定时将自己的信息注册到 Eureka Server 中，并从 Server 中发现其他服务。Eureka Client 中内置一个负载均衡器，用来进行基本的负载均衡。
+In Netfilx, Eureka is a RESTful-style service registration and discovery base service component. The Eureka Client regularly registers itself with the Eureka Server and discovers other services from the Server, and a load balancer is built into the Eureka Client for basic load balancing.
 
-## 附录
+## Appendix
 
-1. [Eureka 官方 WIKI](https://github.com/Netflix/eureka/wiki)
+1. [Eureka Official WIKI](https://github.com/Netflix/eureka/wiki)

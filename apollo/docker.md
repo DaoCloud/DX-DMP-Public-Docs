@@ -1,13 +1,13 @@
-# Jar包容器化使用
+# Jar package containerized use
 
-如果你想通过Docker容器来运行你的应用程序。你可以参考下面的方式来通过编写Dockerfile来制作镜像，并通过环境变量设置配置中心接入所需要的参数。
+If you want to run your application through a Docker container. You can refer to the following to make an image by writing a Dockerfile and set the parameters needed to access the configuration center via environment variables.
 
-## 编写Dockerfile
+## Writing a Dockerfile
 
-前提条件是，你的将你的应用程序打包，比如： `mvn clean package -U -DskipTests`。
-然后，我们将程序包打进镜像里面即可，假设jar包名字最终叫做`query-service.jar`。
+The prerequisite is that you package your application, for example: `mvn clean package -U -DskipTests`.
+Then, we just type the package inside the image, assuming the jar package name ends up being `query-service.jar`.
 
-- Dockerfile示例：
+- Dockerfile example：
 
 ```dockerfile
 FROM openjdk:8-jre-alpine
@@ -32,13 +32,13 @@ ENTRYPOINT -XX:+PrintFlagsFinal -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupM
            $JAVA_OPTS -jar /$DIST_NAME.jar 
 ```
 
-## 构建Docker镜像
+## Build Docker images
 
 ```bash
 docker build -t my-query-service-image .
 ```
 
-## 运行容器
+## Run the container
 
 ```bash
 docker run -e APOLLO_CONFIGSERVICE=http://192.168.2.96:8080 ➊ \
@@ -46,10 +46,10 @@ docker run -e APOLLO_CONFIGSERVICE=http://192.168.2.96:8080 ➊ \
 -d my-query-service-image
 ```
 
-- ➊ 配置中心Config Server的地址。
-- ➋ 配置组ID
+- ➊ The address of the Config Center Config Server.
+- ➋ Configuration Group ID
 
-更多使用请参考：
+For more usage, please refer to.
 
-* [通过注解方式开启](annotation.md)
-* [通过配置文件开启](bootstrap.md)
+* [Open by annotation](annotation.md)
+* [Open by configuration file](bootstrap.md)

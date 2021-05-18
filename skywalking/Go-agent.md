@@ -1,28 +1,28 @@
-# Go 探针接入
+# Go Probe Access
 
-如果你的服务涉及到 Go，可以参考该文档。本文以 Go gin应用为例讲解如何将 Gin 的endpoints 接入到分布式链路追踪。
+If you have a service that involves Go, you can refer to this document. This article uses a Go gin application as an example to explain how to access Gin's endpoints to a distributed link trace.
 
-## 前置条件
+## Prerequisites
 
-### 依赖包与环境安装
+### Dependency packages and environment installation
 
-* 环境 go 1.15.4
+* Environment go 1.15.4
 
-* Go agent包可以通过一下方式安装：
+* The Go agent package can be installed in the following way.
 
 ```bash
 go get -u github.com/SkyAPM/go2sky
 ```
 
-本文档示例中其他库安装：
+Other library installations in this document example.
 
 ```
-//go2sky的gin插件
+//go2sky's gin plugin
 go get -u github.com/SkyAPM/go2sky-plugins/gin/v3
 go get -u github.com/gin-gonic/gin
 ```
 
-## 探针接入
+## Probe access
 
 ```go
 package main
@@ -37,8 +37,8 @@ import (
 
 func main() {
 	/*
-	参数说明：
-	@serverAddr:SkyWalking 后端收集器地址
+	Parameter Description：
+	@serverAddr:SkyWalking back-end collector address
 	*/
 	re, err := reporter.NewGRPCReporter("172.16.200.201:11800")
 	if err != nil {
@@ -46,9 +46,9 @@ func main() {
 	}
 	defer re.Close()
 	/*
-	参数说明：
-	@service 服务名字, 规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。
-	@opts 固定格式，一个Reporter的实例
+	Parameter description.
+	@service service name, rule: tenantCode::namespace(K8S)::service name, linked via ::.
+	@opts Fixed format, an instance of Reporter
 	*/
 	tracer, err := go2sky.NewTracer("devTenant::dmp-t::go-gin-test", go2sky.WithReporter(re))
 	if err != nil {
@@ -57,7 +57,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
     
-    //gin加载go2sky的中间件(插件)实现路径追踪
+    //gin loads go2sky's middleware (plugin) to implement path tracing
 	r.Use(v3.Middleware(r, tracer))
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -68,7 +68,7 @@ func main() {
 }
 ```
 
-## 其他已经实现的插件：
+## Other plugins that have been implemented：
 
 1. [http server & client](http/README.md)
 1. [gear](gear/README.md)
@@ -76,4 +76,4 @@ func main() {
 1. [go-micro](micro/README.md)
 1. [go-restful](go-restful/README.md)
 
-配合go agent的插件，使用以上go web框架开发的endpoints可以自动接入到分布式链路追踪。
+With the go agent plug-in, endpoints developed using the above go web framework can be automatically connected to the distributed link tracking.

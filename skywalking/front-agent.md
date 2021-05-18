@@ -1,19 +1,19 @@
-# 浏览器端监控接入
+# Browser-side monitoring access
 
-浏览器端探针接入需要改动一些项目源码，这里以 Daoshop-UI 项目为例。
-Daoshop-UI 采用了 Vue 进行开发。
+The browser-side probe access requires some changes to the project source code, here is an example of Daoshop-UI project.
+Daoshop-UI is developed using Vue.
 
-## 步骤
-- 1 通过 npm 安装 skywalking-client-js sdk：
+## Steps
+- 1 Install skywalking-client-js sdk via npm: ``bash
 ```bash
 npm install skywalking-client-js --save
 ```
 
-- 随后，在 main.js 中引入 ClientMonitor 并初始化
+- Afterwards, introduce the ClientMonitor in main.js and initialize
 ```js
 ClientMonitor.register({
   // eslint-disable-next-line quotes
-  service: `DX_ENV_ID::SW_AGENT_KUBE_NS::DX_SERVICE_NAME`, // 这里定义了三个环境变量，分别代表 DMP 环境Code，对应的 Kubenetes Namespace，服务名。后续会在脚本里面对其替换。
+  service: `DX_ENV_ID::SW_AGENT_KUBE_NS::DX_SERVICE_NAME`, // Three environment variables are defined here, representing the DMP Environment Code, the corresponding Kubenetes Namespace, and the service name. They will be replaced later in the script.
   pagePath: 'index.html',
   serviceVersion: 'v1.0.0',
   vue: Vue,
@@ -21,8 +21,8 @@ ClientMonitor.register({
 });
 ```
 
-- 配置 Nginx
-由于 skywalking-client-js 会默认请求 /browser、/v3/segments 这两个接口，因此，我们需要通过 Nginx 转发到 OAP Server， nginx.conf 配置如下：
+- Configuring Nginx
+Since skywalking-client-js will request the /browser and /v3/segments interfaces by default, we need to forward them to the OAP Server via Nginx. nginx.conf is configured as follows:
 ```bash
 user  nginx;
 worker_processes  1;
@@ -83,9 +83,9 @@ http {
     }
 }
 ```
-其中，OAP_SERVER 也会通过后续的脚本替换到真实的后端地址。
+Among them, OAP_SERVER will also be replaced by subsequent scripts to the real backend address.
 
-- 通过脚本替换边境变量，达到部署时动态给 DaoShop-UI 配置 Skywalking Client 相关配置的效果
+- By replacing the border variables with scripts, we can achieve the effect of dynamically configuring Skywalking Client related configuration to DaoShop-UI during deployment
 ```shell
 #!/bin/bash
 
@@ -121,7 +121,7 @@ cat ${absolute_path2}.old |
 
 ```
 
-- 最后，在Docker 镜像启动的时候运行脚本：
+- Finally, to run the script when the Docker image starts:
 ```bash
 FROM node:8 AS node-builder
 
@@ -146,13 +146,13 @@ EXPOSE 80
 CMD /usr/share/run.sh && nginx -g 'daemon off;'
 ```
 
-至此，我们就可以通过 Docker Run并配置：
+At this point, we can run through Docker and configure：
 ```bash
 docker run -e DX_ENV_ID=test -e SW_AGENT_KUBE_NS=dmp-ns -e DX_SERVICE_NAME=daoshop-ui -e OAP_SERVER="dmp-skywalking-oap.dmp-m.svc:12800" -d daoshop-ui 
 ```
 
-最后，可以访问 Daoshop-ui 并查看 DMP 界面是否有 daoshop-ui 的相关链路与监控。
+Finally, you can visit Daoshop-ui and see if the DMP interface has links and monitoring associated with daoshop-ui.
 
-## 参考
+## Reference
 - [skywalking-client-js](https://github.com/apache/skywalking-client-js)
-- [daoshop-ui源码](https://gitlab.daocloud.cn/bda/daoshop/shop-ui)
+- [daoshop-ui Source Code](https://gitlab.daocloud.cn/bda/daoshop/shop-ui)

@@ -1,10 +1,10 @@
-# 自定义忽略指定Trace Path
+# Customize to ignore the specified Trace Path
 
-此方式作为一个可选插件来帮助我们忽略指定的Trace，比如常见的Eureka心跳信息等。
+This method is used as an optional plugin to help us ignore specified Trace, such as common Eureka heartbeat messages, etc.
 
-## 前置条件
+## Pre-requisites
 
-获取到Skywalking探针的压缩包或者探针的镜像（此处采用的方式）。解压过后的目录结构如下：
+Get the zip archive of the Skywalking probe or the image of the probe (the method used here). The directory structure after decompression is as follows.
 
 ```
 
@@ -28,7 +28,7 @@
     
 ```
 
-由于是可选插件，因此，默认情况下并没有激活，我们需要将➊中的jar包拷贝或剪切到上面的`plugins`目录下并添加相关配置来激活该插件,即：
+Since it is an optional plugin, it is not activated by default. We need to copy or cut the jar package in ➊ to the `plugins` directory above and add the relevant configuration to activate the plugin, i.e.：
 
 ```
 
@@ -44,7 +44,7 @@
          apm-dubbo-plugin.jar
          apm-feign-default-http-9.x.jar
          apm-httpClient-4.x-plugin.jar
-         apm-trace-ignore-plugin.jar ➊ 注意此处所在文件夹为plugins。
+         apm-trace-ignore-plugin.jar ➊ Note that the folder here is plugins.
          .....
     +-- optional-plugins
     		apm-spring-annotation-plugin.jar 
@@ -52,18 +52,18 @@
     
 ```
 
-在`config`目录下创建`apm-trace-ignore-plugin.config`文件并添加如下配置激活插件：
+Create the `apm-trace-ignore-plugin.config` file in the `config` directory and add the following configuration to activate the plugin：
 
 ```txt
 trace.ignore_path=/your/path/1/**,/your/path/2/** ➊
 ```
 
-➊ 中的路径配置规则支持`Ant Path`匹配风格，比如：
-`/path/*`, `/path/**`, `/path/?`。匹配的Path路径将不会被记录。
+The path configuration rules in ➊ support the `Ant Path` matching style, for example.
+`/path/*`, `/path/**`, `/path/? `. Matching Path paths will not be logged.
 
-## [基于容器Sidecar的方式接入](docker-sidecar.md)的最佳实践
+## Best practices for [container Sidecar-based access](docker-sidecar.md)
 
-主要讲解在Kubernetes Pod initContainer 中执行Shell指令，将 `apm-trace-ignore-plugin.jar` 插件拷贝至 `plugins` 文件夹，并配置需要忽略的路径。
+Mainly explains to execute Shell command in Kubernetes Pod initContainer, copy `apm-trace-ignore-plugin.jar` plugin to `plugins` folder and configure paths to be ignored.
 
 ```yml
 apiVersion: apps/v1
@@ -142,7 +142,7 @@ spec:
             - name: sidecar
               mountPath: /sidecar
       volumes:
-        - name: sidecar  #共享agent文件夹
+        - name: sidecar  #Shareagent folder
           emptyDir: {}
 ---
 apiVersion: v1
@@ -157,5 +157,5 @@ spec:
     app: daoshop-user-center
 ```
 
-- ➊ 将trace-ignore插件拷贝至`plugins`目录下。
-- ➋ 添加相关配置,这里将忽略追踪 `/api/sail/**` 为前缀的URL。
+- ➊ Copy the trace-ignore plugin to the `plugins` directory.
+- ➋ Add the relevant configuration, here the trace-ignore URLs prefixed with `/api/sail/**` will be ignored.

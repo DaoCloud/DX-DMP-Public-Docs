@@ -1,16 +1,16 @@
-## 基于容器Sidecar的方式接入
+## Access based on the container Sidecar
 
-如果你的服务采用容器部署的话，可以参考该文档。本文档讲解了如何通过 kubernetes 部署YAML文件使用 Sidecar 的方式接入应用监控。本文采用 DaoCloud 发布的 Sidecar 镜像包为例。
+You can refer to this document if your services are deployed in containers. This document explains how to access application monitoring using Sidecar through kubernetes deployment YAML files. This article uses the Sidecar image package released by DaoCloud as an example.
 
-## 前置条件
+## Pre-requisites
 
-- 能够拉取/下载 DaoCloud 发布的应用监控 Agent Sidecar 镜像。
+- Ability to pull/download DaoCloud published application monitoring agent Sidecar images.
 
-## 步骤
+## Steps
 
-### 拉取镜像
+### Pull Mirror
 
-### 编排文件参考
+### Arrangement document reference
 
 ```yaml
 apiVersion: apps/v1
@@ -66,7 +66,7 @@ spec:
       - name: host-time
         hostPath:
           path: /etc/localtime
-      - name: sidecar  #共享agent文件夹
+      - name: sidecar  #Shared agent folder
         emptyDir: {}
       restartPolicy: Always
 ---
@@ -84,11 +84,11 @@ spec:
     app: ns-daoshop-admin
 ```
 
-➊ 将带有Agent的镜像中的探针拷贝到共享目录。
+➊ Copy the probes from the image with the Agent to the shared directory.
 
-➋ 使用-javaagent参数指定Vedfolnir探针的路径
+➋ Use the -javaagent parameter to specify the path to the Vedfolnir probe
 
-相关环境变量请参考👉[配置参数说明](agent-settings.md)
+For related environment variables, please refer to👉[Configuration parameters description](agent-settings.md)
 
 
 

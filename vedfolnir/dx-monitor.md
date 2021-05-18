@@ -1,14 +1,14 @@
-## 对接 DX-监控告警
+## Docking DX-monitoring alarms
 
-### 步骤
+### Steps
 
-对接告警平台，要求应用主动暴露 metrics 接口。
+Dock to the alerting platform and require the application to actively expose the metrics interface.
 
-- 首先在配置文件中，设置环境变量 `VEDFOLNIR_IS_EXPOSE_PROMETHEUS` 为 `true`(默认为 true，端口号 8888)，如需指定端口，可以设置 `VEDFOLNIR_PROMETHEUS_PORT`为特定端口号。
+- First, in the configuration file, set the environment variable `VEDFOLNIR_IS_EXPOSE_PROMETHEUS` to `true` (default is true, port number 8888), if you want to specify the port, you can set `VEDFOLNIR_PROMETHEUS_PORT` to a specific port number.
 
-- 部署应用时，yaml 文档中开放该端口
+- Open the port in the yaml documentation when deploying the application
 
-### 编排文件参考
+### Arrangement document reference
 
 ```
 apiVersion: apps/v1
@@ -62,14 +62,14 @@ spec:
               value: "-javaagent:/sidecar/sidecar/skywalking/agent/skywalking-agent.jar -javaagent:/sidecar/sidecar/vedfolnir/vedfolnir-agent.jar"
            ··· #此处省略多个环境变量
             - name: VEDFOLNIR_IS_EXPOSE_PROMETHEUS
-              value: "true"       #默认值为true，如果使用默认值，可省略该配置
+              value: "true"       #The default value is true, if the default value is used, the configuration can be omitted
             - name: VEDFOLNIR_PROMETHEUS_PORT
-              value: "8888"       #默认值为8888，如果使用默认值，可省略该配置
+              value: "8888"       #The default value is 8888, if you use the default value, you can omit this configuration
           volumeMounts:
             - name: sidecar
               mountPath: /sidecar
       volumes:
-        - name: sidecar  #共享agent文件夹
+        - name: sidecar  #Shared agent folder
           emptyDir: {}
 ---
 apiVersion: v1
@@ -87,6 +87,6 @@ spec:
     app: daoshop-order
 ```
 
-➊、➋ 在编排文件中暴露监控端口
+➊、➋ Exposing the monitoring port in the orchestration file
 
-相关环境变量请参考👉[配置参数说明](agent-settings.md)
+For related environment variables, please refer to👉[Configuration parameters description](agent-settings.md)

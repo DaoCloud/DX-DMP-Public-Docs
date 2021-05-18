@@ -1,39 +1,39 @@
-# Python 探针接入
+# Python Probe access
 
-如果你的服务涉及到 Python，可以参考该文档。本文以 Flask 应用为例讲解如何将 Flask 的endpoints 接入到分布式链路追踪。
+If your service involves Python, you can refer to this document. This article uses a Flask application as an example to explain how to connect Flask's endpoints to distributed link tracing.
 
-## 前置条件
+## Pre-requisites
 
-### 依赖包与环境安装
+### Dependency packages and environment installation
 
-* 环境 Python 3.7.9 
+* Environment Python 3.7.9  
 
-* Python agent包被发布在[Pypi](https://pypi.org/project/apache-skywalking/), 你可以通过`pip`安装：
+* The Python agent package is distributed at [Pypi](https://pypi.org/project/apache-skywalking/), which you can install via `pip`：
 
 ```bash
-#安装最新的版本并使用gRPC协议传输数据到OPA
+#Install the latest version and transfer data to OPA using the gRPC protocol
 pip install "apache-skywalking"
 
-#安装最新的版本并使用http协议传输数据到OPA
+#Install the latest version and transfer data to OPA using the http protocol
 pip install "apache-skywalking[http]"
 
-#安装最新的版本并使用kafka协议传输数据到OPA
+#Install the latest version and transfer data to OPA using the kafka protocol
 pip install "apache-skywalking[kafka]"
 
-#安装特定的版本 x.y.z
+#Install a specific version x.y.z
 pip install apache-skywalking==0.1.0
 ```
 
-本文档示例中需要的库：
+Libraries needed for the examples in this document：
 
 ```
 Flask==1.1.2
 redis==3.5.3
 ```
 
-## 目前支持的Python库
+## Currently supported Python libraries
 
-|  库名    |   版本   | 插件名字     |
+|  Library name    |   Versions   |      Plugin Name     |
 | ---- | ---- | ---- |
 | [http.server](https://docs.python.org/3/library/http.server.html) | Python 3.5 ~ 3.8 | `sw_http_server` |
 | [urllib.request](https://docs.python.org/3/library/urllib.request.html) | Python 3.5 ~ 3.8 | `sw_urllib_request` |
@@ -52,11 +52,11 @@ redis==3.5.3
 | [aiohttp](https://sanic.readthedocs.io/en/latest/) | >= 3.7.3 | `sw_aiohttp` |
 | [pyramid](https://trypyramid.com) | >= 1.9 | `sw_pyramid` |
 
-目前只有以上列出的库能够被自动接入探针并接入到分布式链路追踪。
+Currently only the libraries listed above can be automatically accessed by the probe and connected to the distributed link trace.
 
-## Demo项目的探针接入
+## Probe access for Demo projects
 
-* demo结构
+* demo structure
 
 ```
 Flask-Agent
@@ -65,7 +65,7 @@ Flask-Agent
 └── userRepo.py
 ```
 
-其中 **userRepo.py** 示例代码如下：
+where **userRepo.py** sample code is as follows：
 ```python
 import json
 import time
@@ -92,7 +92,7 @@ class UserRepo:
         return user
 ```
 
-其中 **service.py** 示例代码如下：
+where **service.py** sample code is as follows：
 
 ```python
 from UserRepo import UserRepo
@@ -104,7 +104,7 @@ class UserServce:
         return user
 ```
 
-其中 **app.py** 示例代码如下：
+where **app.py** sample code is as follows：
 
 ```python
 from flask import Flask, url_for, request
@@ -128,10 +128,10 @@ def getUser():
         userString = json.dumps(user)
         return userString
 """
-导入依赖库 Python agent SDK 需要SkyWalking 8.0+ and Python 3.5+
-参数说明：
-@ collector :SkyWalking 后端收集器地址
-@ service :服务名字, 以 @结尾代表该服务所在 DMP 租户。
+Importing the dependency library Python agent SDK requires SkyWalking 8.0+ and Python 3.5+
+Parameter description.
+@ collector :SkyWalking backend collector address
+@ service :Service name, ending with @ for the DMP tenant where the service is hosted.
 """
 from skywalking import agent, config
 config.init(collector='127.0.0.1:11800', service='python-flask@devTenant')
@@ -140,33 +140,34 @@ if __name__ == '__main__':
     app.run()
 ```
 
-python flask 探针的接入需要随着 flask 应用一起启动，如上面代码的展示，此外还可以通过环境变量的方式进行配置信息设置。
+Access to the python flask probe needs to be started along with the flask application, as shown in the code above, in addition to the configuration information set by way of environment variables.
 
-## 支持的环境变量
+## Supported Environment Variables
 
-|      环境变量| 介绍     | 默认值     |
+| Environment Variables | Introduction | Defaults |
 | ---- | ---- | ---- |
-| PSW_AGENT_NAME                        | 在 DMP 链路追踪 UI 中展示的服务名。规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。(比如  **devTenant::system::python-flask** 代表 **devTenant** 租户, **system** 命名空间).                     | `Python Service Name` |
-| `SW_AGENT_INSTANCE` |DMP 链路追踪 UI 中展示的实例名。 | Randomly generated |
-| `SW_AGENT_COLLECTOR_BACKEND_SERVICES` | 后端Collector收集器的地址，通过逗号分割集群地址。 | `127.0.0.1:11800` |
-| `SW_AGENT_PROTOCOL` | 与后端OAP进行数据传输的协议： `http`, `grpc` or `kafka`,我们强烈建议在生产环境中使用`grpc`协议，它与`http`协议相比有更好的性能。 `kafka` 协议作为最后的选择使用 | `grpc` |
-| `SW_AGENT_AUTHENTICATION              | 认证token，与后端application.yml中的设置保持一致。           | unset |
-| `SW_AGENT_LOGGING_LEVEL` | 探针日志级别设置。可以是它们中的任意一个： `CRITICAL`, `FATAL`, `ERROR`, `WARN`(`WARNING`), `INFO`, `DEBUG` | `INFO` |
-| `SW_AGENT_DISABLE_PLUGINS` | 禁用的插件，使用逗号分隔名字 | `''` |
-| `SW_MYSQL_TRACE_SQL_PARAMETERS` | 是否收集SQL参数 | `False` |
-| `SW_MYSQL_SQL_PARAMETERS_MAX_LENGTH` | 最大的SQL参数长度，超过的将会被截断                          | `512` |
-| `SW_PYMONGO_TRACE_PARAMETERS` | 是否收集the filters of pymongo | `False` |
-| `SW_PYMONGO_PARAMETERS_MAX_LENGTH` | The maximum length of the collected filters, filters longer than the specified length will be truncated |  `512` |
-| `SW_IGNORE_SUFFIX` | 如果第一个span的操作名包含在这个集合中，这个segement将会被忽视 | `.jpg,.jpeg,.js,.css,.png,.bmp,.gif,.ico,.mp3,.mp4,.html,.svg` |
-| `SW_FLASK_COLLECT_HTTP_PARAMS`| 是否允许flask插件收集中的请求参数 | `false` |
-| `SW_DJANGO_COLLECT_HTTP_PARAMS`| 是否允许Django插件收集请求参数 | `false` |
-| `SW_HTTP_PARAMS_LENGTH_THRESHOLD`| 当`COLLECT_HTTP_PARAMS` 启用时, 这个参数限制多少个字符会发送给后端,如果使用了负数，表示发送全部数据, NB. 添加此配置项是为了提高性能. | `1024` |
-| `SW_CORRELATION_ELEMENT_MAX_NUMBER`| 在相关联的context中最大数量的element                         | `3` |
-| `SW_CORRELATION_VALUE_MAX_LENGTH`| 在相关联的context中的element的最大长度                       | `128` |
-| `SW_TRACE_IGNORE`| 是否需要忽略trace | `false` |
-| `SW_TRACE_IGNORE_PATH`| 可以配置多个URL模板，去匹配不想被追踪的endpoint. 当前的匹配规则使用Ant Path match style , 比如 /path/*, /path/**, /path/?. | `''` |
-| `SW_ELASTICSEARCH_TRACE_DSL`| 如果true, 追踪所有接入ElasticSearch的 DSL(Domain Specific Language) | `false` |
-| `SW_KAFKA_REPORTER_BOOTSTRAP_SERVERS` | 与kafka集群建立连接的 列表. 具体格式： host1:port1,host2:port2,... | `localhost:9092` |
-| `SW_KAFKA_REPORTER_TOPIC_MANAGEMENT` | 为服务实例报告和注册指定Kafka主题名 | `skywalking-managements` |
-| `SW_KAFKA_REPORTER_TOPIC_SEGMENT` | 指定用于跟踪数据的Kafka主题名 | `skywalking-segments` |
-| `SW_KAFKA_REPORTER_CONFIG_key` | 初始化Kafka生产端的配置. 支持基本的参数 ( `str`, `bool`, or `int`) 具体请看 [这里](https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html#kafka.KafkaProducer) | unset |
+| PSW_AGENT_NAME | The name of the service presented in the DMP link tracking UI. Rule: tenantCode::namespace(K8S)::serviceName, via :: link. (e.g. **devTenant::system::python-flask** stands for **devTenant** tenant, **system** namespace).                     | `Python Service Name` |
+| `SW_AGENT_INSTANCE` | The name of the instance displayed in the DMP link tracking UI. | `Python Service Name` | `SW_AGENT_INSTANCE`
+| `SW_AGENT_COLLECTOR_BACKEND_SERVICES` | The address of the back-end Collector collector, split by a comma. | `127.0.0.1:11800` |
+| `SW_AGENT_PROTOCOL` | Protocols for data transfer with back-end OAP: `http`, `grpc` or `kafka`, we strongly recommend using the `grpc` protocol in production environments, it has better performance compared to the `http` protocol. The `kafka` protocol is used as the last option | `grpc` |
+| `SW_AGENT_AUTHENTICATION | authentication token, consistent with the settings in the back-end application.yml.           | unset |
+| `SW_AGENT_LOGGING_LEVEL` | The probe logging level setting. Can be any of them: `CRITICAL`, `FATAL`, `ERROR`, `WARN`(`WARNING`), `INFO`, `DEBUG` | `INFO` |
+| `SW_AGENT_DISABLE_PLUGINS` | Disabled plugins, use comma-separated names | `''` |
+| `SW_MYSQL_TRACE_SQL_PARAMETERS` | Whether to collect SQL parameters | `False` |
+| `SW_MYSQL_SQL_PARAMETERS_MAX_LENGTH` | Maximum SQL parameter length, anything longer than that will be truncated | `512` |
+| `SW_PYMONGO_TRACE_PARAMETERS` | Whether to collect the filters of pymongo | `False` |
+| `SW_PYMONGO_PARAMETERS_MAX_LENGTH` | The maximum length of the collected filters, filters longer than the specified length will The maximum length of the collected filters, filters longer than the specified length will be truncated | `512` |
+| `SW_IGNORE_SUFFIX` | If the operation name of the first span is included in this collection, this segement will be ignored | `.jpg,.jpeg,.js,.css,.png,.bmp,.gif,.ico,.mp3,.mp4,.html,.svg` |
+| `SW_FLASK_COLLECT_HTTP_PARAMS`| Whether to allow request parameters in flask plugin collection | `false` |
+| `SW_DJANGO_COLLECT_HTTP_PARAMS`| Whether to allow the Django plugin to collect request parameters | `false` |
+| `SW_HTTP_PARAMS_LENGTH_THRESHOLD`| When `COLLECT_HTTP_PARAMS` is enabled, this parameter limits how many characters will be sent to the backend, and if a negative number is used, it means that all data is sent, NB. This configuration item is added to improve performance. | `1024` |
+| `SW_CORRELATION_ELEMENT_MAX_NUMBER`| The maximum number of elements in the associated context | `3` |
+| `SW_CORRELATION_VALUE_MAX_LENGTH`| the maximum length of elements in the associated context | `128` |
+| `SW_TRACE_IGNORE`| whether to ignore traces | `false` |
+| `SW_TRACE_IGNORE_PATH`| Multiple URL templates can be configured to match endpoints that do not want to be traced. The current match rule uses the Ant Path match style , e.g. /path/*, /path/**, /path/? | `''` |
+| ``SW_ELASTICSEARCH_TRACE_DSL`` | if true, tracks all DSLs (Domain Specific Language) that access ElasticSearch | ``false`` |
+| `SW_KAFKA_REPORTER_BOOTSTRAP_SERVERS` | A list of connections to the kafka cluster. The specific format: host1:port1,host2:port2,... | `localhost:9092` |
+| `SW_KAFKA_REPORTER_TOPIC_MANAGEMENT` | Specify Kafka topic names for service instance reporting and registration | `skywalking-managements` |
+| `SW_KAFKA_REPORTER_TOPIC_SEGMENT` | Specify the Kafka topic name for tracking data | `skywalking-segments` |
+| `SW_KAFKA_REPORTER_CONFIG_key` | Initialize the Kafka production side configuration. Basic parameters are supported ( `str`, `bool`, or `int`) See [here](https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html#kafka. KafkaProducer) | unset |
+

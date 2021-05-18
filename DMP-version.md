@@ -1,7 +1,7 @@
-# DMP组件及版本支持说明
-此处列举了DMP产品中的版本以及组件对应版本
+# DMP component and version support description
+The versions in the DMP product and the corresponding versions of the components are listed here
 
-|DMP版本|Pinpoint|Apollo|Skywalking| Eureka | Spring Boot | Spring Cloud |
+|DMP Version|Pinpoint|Apollo|Skywalking| Eureka | Spring Boot | Spring Cloud |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |DMP 1.0| 1.7.3|0.10.2|N/A|1.7.0|1.x|ALL|
 |DMP 1.1| 1.7.1|0.10.2|N/A|1.7.0|1.x| ALL |

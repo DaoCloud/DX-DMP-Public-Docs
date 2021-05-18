@@ -1,30 +1,30 @@
-# 配置中心公共配置接入文档
+## Configuration Center Public Configuration Access Documentation
 
-## 一.配置中心使用
+## I. Configuration Center Usage
 
-### 1.1 创建公共配置
+### 1.1 Creating a public configuration
 
-在不存在公共配置组的情况下，点击创建配置组会有公共配置组的选项。
+In the case that no public configuration group exists, clicking Create Configuration Group will give you the option to create a public configuration group.
 
 ![](img/public-config-1.png)
 
-点击确认之后就会创建出如下配置组。每个环境只会存在唯一一个公共配置组。
+When you click Confirm, the following configuration groups will be created. Only one public configuration group will exist for each environment.
 
 ![](img/public-config-2.png)
 
-### 1.2 创建公共配置空间
+### 1.2 Creating a public configuration space
 
-创建一个公共配置组之后会有一个默认的名为{env_code}.application的公共命名空间。
+After creating a public configuration group there will be a default public namespace named {env_code}.application.
 
 ![](img/public-config-3.png)
 
-可以通过新增公共命名空间添加命名空间，并且名称都会有{env_code}.前缀。
-> 图中例子的环境code为 public
-## 二.客户端使用
+Namespaces can be added by adding new public namespaces, and the names will all have {env_code}. prefix.
+> The environment code for the example in the figure is public
+## II. Client-side use
 
-### 2.1 通过注释的方法使用公共配置
+### 2.1 Using the public configuration by annotation
 
-其他接入步骤不变,只需修改@EnableApolloConfig里面的参数
+Other access steps remain the same, just change the parameters in @EnableApolloConfig
 
 ```java
  @SpringBootApplication
@@ -36,5 +36,5 @@
    }
 ```
 
-**@EnableApolloConfig({"public.application","application"})** : 其中public.application为公共的命名空间，application为appId下的私有命名空间。
-注: 放在前面的配置优先级比后面高。
+**@EnableApolloConfig({"public.application","application"})** : where public.application is the public namespace and application is the private namespace under appId.
+Note: The configuration that is placed first has higher priority than the one that follows.

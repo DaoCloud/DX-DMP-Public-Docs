@@ -1,4 +1,4 @@
-# 探针插件支持列表
+# Probe plug-in support list
 
 * HTTP Server
   * [Tomcat](https://github.com/apache/tomcat) 7
@@ -115,6 +115,6 @@
   * [Apache Commons DBCP](https://github.com/apache/commons-dbcp) 2.x
 
 
-¹由于许可的限制或不兼容，这些插件发布在第三方仓库中。可以到[SkyAPM java插件扩展仓库](https://github.com/SkyAPM/java-plugin-extensions)获得这些插件。
+¹ Due to licensing restrictions or incompatibility, these plugins are released in third-party repositories. You can get these plugins at [SkyAPM java plugin extension repository](https://github.com/SkyAPM/java-plugin-extensions).
 
-²根据我们的经验，这些插件会对性能有影响，或者，必须在某些情况下才使用，所以只发布在`/optional-plugins`文件夹下，想要使用的话，复制到`/plugins`文件夹下。
+²In our experience, these plugins can have an impact on performance, or, must be used only under certain circumstances, so they are only published in the `/optional-plugins` folder and copied to the `/plugins` folder if you want to use them.

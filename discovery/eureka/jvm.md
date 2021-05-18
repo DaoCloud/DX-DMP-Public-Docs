@@ -1,8 +1,8 @@
-# 常规 JVM 接入
+## General JVM access
 
-## 引入依赖
+# # Introduce dependencies
 
-在 `pom.xml` 中加入
+In `pom.xml` add
 
 ```java
 <dependency>
@@ -12,18 +12,18 @@
 </dependency>
 ```
 
-## 初始化 Eureka Client
+## Initializing the Eureka Client
 
 ```java
-// 使用配置进行 Eureka Client 初始化
+// Initialize the Eureka Client using the configuration
 DiscoveryManager.getInstance().initComponent(
                 new CloudInstanceConfig(),
                 new DefaultEurekaClientConfig());
 ```
 
-## 创建配置文件
+## Create configuration file
 
-在`Resources`目录中创建 `eureka-client.properties` 配置文件，`Eureka Client` 在初始化的时候，默认读取此配置文件。
+Create the `eureka-client.properties` configuration file in the `Resources` directory, which is read by default when the `Eureka Client` is initialized.
 
 ```yaml
 eureka.name=${YOUR_Application_Name}
@@ -32,8 +32,8 @@ eureka.region=default
 eureka.serviceUrl.default=${YOUR_EUREKA_ADDRESS}
 ```
 
-相对于 `SpringCloud` 提供的 `Eureka Client` 来说，原生的 `Eureka Client` 没有提供 `eureka.instance.preferIpAddress` 这样的参数，会使用本机的 `Hostname` 注册到服务端，因此如果在公司内的网络无法通过 `Hostname` 访问，此方案是不行的。
+Compared to the `Eureka Client` provided by `SpringCloud`, the native `Eureka Client` does not provide parameters like `eureka.instance.preferIpAddress` and will use the local `Hostname` to register to the server So if the network in the company is not accessible via `Hostname`, this solution will not work.
 
-## 附录
+## Appendix
 
 1. [Configuring Eureka](https://github.com/Netflix/eureka/wiki/Configuring-Eureka)

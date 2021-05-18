@@ -1,16 +1,16 @@
-# 通过扩展PatternLayout的方式
-在集成自定义的格式的日志的过程中，一般会采用过滤器或者拦截器的方式来做。然而，对于此处讲解的`将Spring Boot服务的AppName和Eureka的实例信息集成到日志系统中`的时候，应用名和实例Id在程序启动过后一般不会变化的，如果每次都去走过滤器和拦截器的话，感觉有点多余。
+# By way of extending PatternLayout
+In the process of integrating custom formatted logs, it is usually done using filters or interceptors. However, for the `Integration of Spring Boot service AppName and Eureka instance information into the logging system` explained here, the application name and instance Id generally do not change after the application is started, so it feels a bit redundant to go through filters and interceptors every time.
 
-源码参考：[Github](https://git.mschina.io/microservice/demo/demo-project/tree/master/dmp-producer)
-## 思路
+Source Code Reference：[Github](https://git.mschina.io/microservice/demo/demo-project/tree/master/dmp-producer)
+## Ideas
 
-- 在应用程序中添加对Spring Boot启动过程中`ApplicationEnvironmentPreparedEvent`事件的监听
-，随后将AppName和InstanceId放入一个静态变量中。
-- 继承`PatternLayout`之后，上面两个信息在日志输出过程中就会被填充上。
+- Add a listener to the `ApplicationEnvironmentPreparedEvent` event during Spring Boot startup in the application
+and then put the AppName and InstanceId into a static variable.
+- After inheriting `PatternLayout`, the above two messages are filled in during the log output.
 
-## 步骤：
-1、创建自定义的格式转换器`AppInfoConverter`:
-该类继承自`ch.qos.logback.classic.pattern.ClassicConverter`
+## Steps：
+1、Create custom format converters`AppInfoConverter`:
+This class inherits from`ch.qos.logback.classic.pattern.ClassicConverter`
 
 ```java
 /**
@@ -26,8 +26,8 @@ public class AppInfoConverter extends ClassicConverter {
 }
 ```
 
-2、将转换器添加到自定义的`PatternLayout`中：
-该类继承自`ch.qos.logback.classic.PatternLayout`:
+2、Add the converter to the custom `PatternLayout`:
+This class inherits from`ch.qos.logback.classic.PatternLayout`:
 
 ```java
 
@@ -40,8 +40,8 @@ public class AppInfoPatternLayout extends PatternLayout {
 }
 ```
 
-3、添加对Spring Boot启动事件`ApplicationEnvironmentPreparedEvent `的监听:
-- 继承`org.springframework.context.ApplicationListener`
+3、Add a listener for the Spring Boot start event `ApplicationEnvironmentPreparedEvent`:
+- This class inherits from`org.springframework.context.ApplicationListener`
 
 ```java
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -60,7 +60,7 @@ public class ApplicationStartedEventListener implements ApplicationListener<Appl
 }
 ```
 
-- 按照SpringBoot官方文档在`resources/META-INF`下面添加如下描述文件：
+- Add the following description file under `resources/META-INF` in accordance with the official SpringBoot documentation：
 
 `spring.factories`
 
@@ -68,13 +68,13 @@ public class ApplicationStartedEventListener implements ApplicationListener<Appl
 org.springframework.context.ApplicationListener=com.example.webclientdemo.MyApplicationStartedEventListener
 ```
 
-4、添加`logback.xml`配置文件
-在`resources/logback.xml`下面添加如下内容：
+4、Add `logback.xml` configuration file
+Add the following under `resources/logback.xml`：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <!--输出到控制台-->
+    <!--Output to console-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
              <level>ERROR</level>
@@ -84,19 +84,19 @@ org.springframework.context.ApplicationListener=com.example.webclientdemo.MyAppl
         </layout>
     </appender>
 
-    <!--输出到文件-->
+    <!--Output to file-->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 日志路径 可以是绝对路径也可以是相对路径-->
+        <!-- Log paths can be absolute or relative-->
         <file>logs/logback-producer.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 定义了日志的切分方式 -->
+            <!-- Defines how the logs are sliced -->
             <fileNamePattern>logs/crn/apollo.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!-- 表示只保留最近30天的日志 -->
+            <!-- Indicates that only the last 30 days of logs are kept -->
             <maxHistory>30</maxHistory>
-            <!-- 用来指定日志文件的上限大小，例如设置为1GB的话，那么到了这个值，就会删除旧的日志。-->
+            <!-- Used to specify the maximum size of the log file, for example, if it is set to 1GB, then the old logs will be deleted when it reaches this value-->
             <totalSizeCap>1GB</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- maxFileSize:这是活动文件的大小，默认值是10MB -->
+                <!-- maxFileSize:This is the size of the active file, the default value is 10MB -->
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
@@ -104,7 +104,7 @@ org.springframework.context.ApplicationListener=com.example.webclientdemo.MyAppl
             <pattern>%d{HH:mm:ss.SSS} %contextName [%app_info] [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    <!-- 用来指定最基础的日志输出级别，只有一个level属性。 -->
+    <!-- Used to specify the most basic log output level, with only one level attribute. -->
     <root level="info">
         <appender-ref ref="console"/>
         <appender-ref ref="file"/>
@@ -113,8 +113,8 @@ org.springframework.context.ApplicationListener=com.example.webclientdemo.MyAppl
 
 ```
 
-5、最后启动程序查看效果：
-发现`[App_Name: dmp-producer, Instance_Id: null]`等字样，其中`Instance_Id: null`是demo中没有接入Eureka的缘故。
+5、Finally start the program to see the results：
+Found the words `[App_Name: dmp-producer, Instance_Id: null]`, where `Instance_Id: null` is the reason why there is no access to Eureka in the demo.
 
 ```bash
 18:13:34.415 default [App_Name: dmp-producer, Instance_Id: null] [main] INFO  i.d.apollodemo.ProducerApplication -No active profile set, falling back to default profiles: default

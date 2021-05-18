@@ -1,23 +1,23 @@
-# 引入依赖
+# Introducing Dependencies
 
-本文主要讲解如何引入依赖，来接入Eureka的注册中心
+This article explains how to introduce dependencies to access Eureka's registry
 
-主要依赖有：
+The main dependencies are
 
 ```xml
-		<!-- Eureka Client相关依赖 -->
+		<!-- Eureka Client Related Dependencies -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!-- 启用web服务 -->
+        <!-- Enable web services -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 ```
 
-启动类代码如下：
+The startup class code is as follows：
 
 ```java
 @SpringBootApplication
@@ -30,7 +30,7 @@ public class ConsumerApplication {
 }
 ```
 
-在application.yml添加eureka-client相关配置，代码如下所示：
+Add eureka-client related configuration to application.yml with the following code：
 
 ```
 server:
@@ -46,6 +46,6 @@ eureka:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka/}
 ```
 
-配置完成后启动应用即可
+Just start the application after the configuration is done
 
-详情可见Dao_Shop中[daoshop-user-center](https://github.com/DaoCloud-Labs/daoshop-user-center), [daoshop-product](https://github.com/DaoCloud-Labs/daoshop-product)服务demo.
+For more details, see [daoshop-user-center](https://github.com/DaoCloud-Labs/daoshop-user-center), [daoshop-product](https://github.com/) in Dao_Shop. DaoCloud-Labs/daoshop-product) service demo.

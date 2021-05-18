@@ -1,27 +1,27 @@
-# Nginx 探针接入(容器模式)
+# Nginx Probe Access (Container Mode)
 
-如果你的应用使用到了Nginx，可以参考该文档。本文以 OpenResty为例讲解如何将经过nginx的endpoints接入到分布式链路追踪。
+If your application uses Nginx, you can refer to this document. This article uses OpenResty as an example to explain how to access endpoints that go through nginx to distributed link tracing.
 
-## 前置条件
+## Pre-requisites
 
-### 依赖包与环境安装
+### Dependency packages and environment installation
 
-* docker 19及以上
+* docker 19 and above
 
-* Nginx agent以lua脚本形式实现的，通过git下载需要的lua module：
+* Nginx agent is implemented as a lua script, download the required lua module via git：
 
 ```bash
 git clone https://github.com/apache/skywalking-nginx-lua.git
 ```
 
-## 探针接入
+## Probe access
 
-你需要构建的目录结构：
+The directory structure you need to build：
 
 
 ```
 your folder
-├── skywalking-nginx-lua			#git拉取的lua gen仓库
+├── skywalking-nginx-lua			#The lua gen repository pulled by git
 ├── nginx.conf
 ├── startup.sh
 └── docker-compose.yaml
@@ -29,7 +29,7 @@ your folder
 ```
 
 
-具体的三个文件：
+Three specific documents：
 
 * docker-compose.yaml
 
@@ -40,7 +40,7 @@ services:
     image: openresty/openresty
     container_name: openresty
     environment:
-      - "COLLECTOR=172.0.0.0"	#你的skywalking后端地址
+      - "COLLECTOR=172.0.0.0"	#Your skywalking backend address
     volumes:
       - $PWD/startup.sh:/opt/bin/startup.sh
       - $PWD/skywalking-nginx-lua/lib:/usr/local/skywalking-nginx-lua/lib
@@ -55,7 +55,7 @@ networks:
   swnet:
 ```
 
-* nginx.conf（**探针接入配置**）
+* nginx.conf（**Probe access configuration**）
 
 ```
 worker_processes  1;
@@ -66,7 +66,7 @@ events {
     worker_connections 1024;
 }
 http {
-	#你放置nginx探针库的位置
+	#The location where you put the nginx probe library
     lua_package_path "/usr/local/skywalking-nginx-lua/lib/?.lua;;";
     # Buffer represents the register inform and the queue of the finished segment
     lua_shared_dict tracing_buffer 100m;
@@ -76,16 +76,16 @@ http {
     init_worker_by_lua_block {
         local metadata_buffer = ngx.shared.tracing_buffer
         
-        #参数说明：
-        #@serviceName :服务名字
+        #Parameter Description：
+        #@serviceName :Service Name
         #
         metadata_buffer:set('serviceName', 'openresty-lua')
         -- Instance means the number of Nginx deployment, does not mean the worker instances
         metadata_buffer:set('serviceInstanceName', 'openresty-lua-instanceA')
 
         require("skywalking.util").set_randomseed()
-        #参数说明：
-        #填入skywalking后端地址
+        #Parameter Description：
+        #Fill in the skywalking backend address
         require("skywalking.client"):startBackendTimer("http://${collector}:12800")
     }
 

@@ -1,37 +1,37 @@
-# Node.js 探针接入
+# Node.js Probe access
 
-如果你的服务涉及到 Node.js，可以参考该文档。本文以 Node.js express应用为例讲解如何将 express 的endpoints 接入到分布式链路追踪。
+If your service involves Node.js, you can refer to this document. This article uses a Node.js express application as an example to explain how to connect express's endpoints to distributed link tracing.
 
-## 前置条件
+## Prerequisites
 
-### 依赖包与环境安装
+### Dependency packages and environment installation
 
-* 环境 Node.js 14.15.3
+* Environment Node.js 14.15.3
 
-* Node.js agent module可以通过一下方式安装：
+* Node.js agent module can be installed in the following way：
 
 ```bash
 npm install skyapm-nodejs@latest --save
 ```
 
-本文档示例中其他库安装：
+Other library installations in this document example：
 
 ```bash
-//go2sky的gin插件
+//go2sky gin plugin
 npm install mysql --save
 npm install express --save
 ```
 
-## 探针接入
+## Probe access
 
 ```javascript
 /*
-参数说明：
-@serviceName 服务名字, 规则：租户Code::namespace(K8S)::服务名，通过 :: 链接。
-@instanceName 实例名字
-@directServers SkyWalking后端收集器地址(使用gRPC 协议传输数据)
-注意：
-	在你使用其他module之前，必须先启动 skyapm-nodejs，否则无法收集数据
+Parameter description.
+@serviceName Service name, Rule: tenantCode::namespace(K8S)::serviceName, via :: link.
+@instanceName Instance name
+@directServers SkyWalking backend collector address (uses gRPC protocol to transfer data)
+Caution.
+	You must start skyapm-nodejs before you can use other mods, otherwise you cannot collect data
 */
 require('skyapm-nodejs').start({
     serviceName: 'devTenant::dmp-t::express-demo',
@@ -52,7 +52,7 @@ app.get('/user', function (req, res) {
   connection.connect();
   var myerror = "";
   /*
-  用到的表：
+  Table used：
   CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
@@ -80,15 +80,15 @@ app.get('/user', function (req, res) {
 var server = app.listen(8081, function () {
   var host = server.address().address
   var port = server.address().port
-  console.log("应用实例，访问地址为 http://%s:%s", host, port)
+  console.log("Application instance, accessed at http://%s:%s", host, port)
 })
 
 ```
 
-## 现在已经支持的module：
+## Mods that are now supported：
 
 1. [Http](https://nodejs.org/api/http.html)
 1. [Mysql](https://github.com/mysqljs/mysql)
 1. [Egg](https://github.com/eggjs/egg)
 
-在Node.js中，使用以上module，agent可以自动将其涉及到endpoints的接入到分布式链路追踪。
+In Node.js, using the above mods, the agent can automatically connect its access to the distributed link trace involving endpoints.

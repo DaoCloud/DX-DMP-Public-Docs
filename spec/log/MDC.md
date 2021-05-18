@@ -1,17 +1,17 @@
-# 通过拦截器和MDC实现
-该方法与上面不同的是，此方法通过拦截器实现，该场景适用于比如：想将每次请求的Ip继承到日志系统中，以及一些动态的值的集成。
+# Implemented through interceptors and MDCs
+This method differs from the above in that this method is implemented through an interceptor. This scenario is suitable for e.g. if you want to inherit the Ip of each request into the logging system, and for some dynamic integration of values.
 
-此处讲解怎么实现前面通过`PatternLayout`实现的功能。
-参考源码 ：[Github](https://git.mschina.io/microservice/demo/demo-project/tree/master/dmp-consumer)
+This section explains how to implement the functions achieved by `PatternLayout`.
+Reference source code ：[Github](https://git.mschina.io/microservice/demo/demo-project/tree/master/dmp-consumer)
 ## 思路
-1. 做个全局拦截器，logback 的 MDC 类注入 appName，instanceId
+1. Make a global interceptor, logback's MDC class to inject appName, instanceId
 
-2. logback 输出 pattern 标签里配置获取 MDC 注入的参数，如<pattern>[%X{appName}]  [%X{instanceId}]</pattern>
+2. The logback output pattern tag configures the parameters for getting MDC injections, such as<pattern>[%X{appName}]  [%X{instanceId}]</pattern>
 
-## 步骤：
-1、继承`org.springframework.web.servlet.HandlerInterceptor`类：
+## Steps:
+1、Inheritance`org.springframework.web.servlet.HandlerInterceptor` class：
 
-在每次请求拦截的时候将需要写入日志的值通过MDC接口写入：
+The values to be written to the log at each request interception are written through the MDC interface to:
 
 ```java
 @Component
@@ -46,9 +46,9 @@ public class LogInterceptor implements HandlerInterceptor {
 }
 ```
 
-2、注册该拦截器：
+2、Register this interceptor：
 
-继承`org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter`类：
+Inheritance`org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter`class：
 
 ```java
 @Configuration
@@ -64,7 +64,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 }
 ```
 
-3、添加`logback.xml`配置
+3、Add `logback.xml` configuration
 
 ```xml
 ······
@@ -74,7 +74,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 ······
 ```
 
-4、启动程序查看日志输出：
+4、Start the program to view the log output：
 
 ```bash
 2018-12-27 19:01:13.218 [dmp-consumer] [localhost:dmp-2018-12-27 19:01:10.835 [dmp-consumer] [localhost:dmp-consumer:1235] |-INFO  [http-nio-1235-exec-1] com.netflix.config.ChainedDynamicProperty [115] -| Flipping property: dmp-consumer.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647

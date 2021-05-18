@@ -1,12 +1,12 @@
-# 构建通用探针镜像
+# Build a generic probe image
 
-## 通过Dockerfile将探针装入基础镜像中
+## Load the probe into the base image via Dockerfile
 
 ```txt
 
 FROM openjdk:8-jre-alpine
 
-TODO:修改下载地址
+TODO:Modify download address
 ENV TZ=Asia/Shanghai \
     AGENT_REPO_URL="http://nexus.mschina.io/nexus/service/local/repositories/labs/content/io/daocloud/mircoservice/skywalking/agent/2.0.1/agent-2.0.1.gz"
 
@@ -26,17 +26,17 @@ RUN set -ex; \
 
 ```
 
-## 构建镜像
+## Build Mirror
 
-比如:
+For example:
 
 ```bash
 docker build -t my-common-base-agent-image:latest .
 ```
 
-## 如何使用
+## How to use
 
-有两种使用方式：
+There are two ways to use it.
 
-- 作为业务服务的基础镜像：例如在业务服务Dockerfile中采用此镜像`FROM my-common-base-agent-image:latest`。
-- 通过Agent Sidecar方式使用,更多参考[基于容器Sidecar的方式接入](docker-sidecar.md)。
+- As a base image for a business service: for example, use this image in the business service Dockerfile `FROM my-common-base-agent-image:latest`.
+- Use it through Agent Sidecar, see [Container Sidecar-based access](docker-sidecar.md) for more information.

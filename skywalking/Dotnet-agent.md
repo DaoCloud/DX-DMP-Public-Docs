@@ -1,37 +1,37 @@
 
-# DotNet 探针接入
+# DotNet Probe access
 
-如果你的服务涉及到 DotNet，可以参考该文档。本文以 [ASP.NET Core](https://github.com/dotnet/aspnetcore)应用为例讲解如何将 ASP.NET Core的endpoints 接入到分布式链路追踪。本文档默认你使用了[官方教程搭建一个了ASP.NET Core 的Web API 应用](https://docs.microsoft.com/zh-cn/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio)
+If your service involves DotNet, you can refer to this document. This article uses the [ASP.NET Core](https://github.com/dotnet/aspnetcore) application as an example to explain how to connect ASP.NET Core endpoints to distributed link tracing. By default, you use the [official tutorial to build a Web API application for ASP.NET Core](https://docs.microsoft.com/zh-cn/aspnet/core/tutorials/first-web-api?view=aspnetcore- 3.1&tabs=visual-studio)
 
-## 前置条件
+## Pre-requisites
 
-### 依赖包与环境安装
+### Dependency packages and environment installation
 
-* netcoreapp2.0/netframework4.6.1 或以上
+* netcoreapp2.0/netframework4.6.1 or above
 
-* SkyAPM .NET Core Agent库可以通过一下方式安装(程序包管理器控制台执行)或使用Visual Studio的NuGet包管理器安装：
+* The SkyAPM .NET Core Agent library can be installed in the following way (package manager console execution) or using Visual Studio's NuGet package manager：
 
 ```shell
 dotnet add package SkyAPM.Agent.AspNetCore
 ```
 
-* 对于SkyAPM .NET Core Agent v1.0.0版本，它只支持SkyWalking 8.0或者更高版本，如果你使用Skywalking 7.0或者其他低版本，请使用SkyAPM .NET Core Agent v0.9.0
+* NET Core Agent v1.0.0, it only supports SkyWalking 8.0 or higher, if you are using Skywalking 7.0 or other low version, please use SkyAPM .NET Core Agent v0.9.0
 
-## 探针接入
+## Probe access
 
-1. 下载配置文件生成工具：`SkyAPM.DotNet.CLI`
+1. Download the profile generation tool：`SkyAPM.DotNet.CLI`
 
    ```
    dotnet tool install -g SkyAPM.DotNet.CLI
    ```
 
-2. 使用工具生成`skyapm.json`文件  `dotnet skyapm config [your_service_name] [your_servers]` ，执行示例：
+2. Use the tool to generate the `skyapm.json` file `dotnet skyapm config [your_service_name] [your_servers]` and execute the example：
 
    ```
    dotnet skyapm config sample_app 192.168.0.1:11800
    ```
 
-   命令执行后会在当前目录下生成名叫`skyapm.json`的文件：
+   The command will generate a file named `skyapm.json` in the current directory after execution：
 
    ```
    {
@@ -66,34 +66,34 @@ dotnet add package SkyAPM.Agent.AspNetCore
    }
    ```
 
-   配置文件解释：[**重要配置解释**](#重要配置解释)
+   Configuration file explanation: [**Important configuration explanation**](#Important configuration explanation)
 
-3. 设置环境变量
+3. Set environment variables
 
    ```
    ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=SkyAPM.Agent.AspNetCore
    ```
 
-4. 启动应用
+4. Launch Application
 
-   启动应用后，你可以在`logs`文件夹下查看探针的运用情况
+   After starting the application, you can view the probe usage in the `logs` folder
 
-## 现在已经支持的库
+## Libraries now supported
 
-- [支持列表](https://github.com/SkyAPM/SkyAPM-dotnet/blob/master/docs/Supported-list.md)
+- [Support List](https://github.com/SkyAPM/SkyAPM-dotnet/blob/master/docs/Supported-list.md)
 
-配合dotnet agent，以上库可以自动接入到分布式链路追踪。
+Together with dotnet agent, the above libraries can be automatically connected to distributed link tracing.
 
-## 重要配置解释
+## Important configurations explained
 
-| 名字           | 解释                                                         | 默认值                 |
+| Name           | Explanation                                                  | Default                |
 | -------------- | ------------------------------------------------------------ | ---------------------- |
-| ServiceName    | 在 DMP 链路追踪 UI 中展示的服务名。以 @结尾代表该服务所在 DMP 租户 | your_service_name      |
-| SamplePer3Secs | 每3秒采样数                                                  | -1                     |
-| Percentage     | 采样百分比                                                   | -1.0                   |
-| Level          | 日志级别                                                     | Information            |
-| FilePath       | 日志保存路径                                                 | logs/skyapm-{Date}.log |
-| Interval       | 每多少毫秒刷新                                               | 3000                   |
-| Servers        | 后端Collector收集器的地址，通过逗号分割集群地址。            | localhost:11800        |
-| Timeout        | 创建gRPC链接的超时时间，毫秒                                 | 10000                  |
-| ConnectTimeout | gRPC最长链接时间，毫秒                                       | 10000                  |
+| ServiceName    | The name of the service displayed in the DMP link tracking UI. Ends with @ for the DMP tenant where the service is located | your_service_name |
+| SamplePer3Secs | Number of samples per 3 seconds                              | -1                     |
+| Percentage     | Sampling Percentage                                          | -1.0                   |
+| Level          | Log level                                                    | Information            |
+| FilePath       | path to logs/skyapm-{Date}.log |
+| Interval       | How many milliseconds to refresh                             | 3000                   |
+| Servers        | The address of the back-end Collector collector, split by a comma.  | localhost:11800 |
+| Timeout        | The timeout to create a gRPC link, in milliseconds           | 10000                  |
+| ConnectTimeout | The maximum link time for gRPC, in milliseconds              | 10000                  |

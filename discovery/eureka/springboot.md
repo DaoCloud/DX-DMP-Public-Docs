@@ -1,8 +1,8 @@
-#  [推荐] SpringBoot & SpringCloud 接入
+# [Recommended] SpringBoot & SpringCloud Access
 
-## 引入依赖
+## Introducing dependencies
 
-在 `pom.xml` 中加入
+In `pom.xml` add
 
 ```java
 <dependency>
@@ -11,9 +11,9 @@
 </dependency>
 ```
 
-## 修改启动类（可选）
+## Modify startup class (optional)
 
-当应用内无冲突配置时，此步骤可忽略，随着 `依赖` 的增加，应用将自行启用 `eureka-client`
+This step can be ignored when there is no conflicting configuration within the application, and the application will enable `eureka-client` on its own as `dependencies` are added
 
 ```java
 @SpringBootApplication
@@ -26,17 +26,17 @@ public class XXXApplication {
 }
 ```
 
-## 增加注册配置
+## Add registration configuration
 
-在 `application.yml` 添加 `eureka-client` 相关配置，代码如下所示：
+Add `eureka-client` related configuration to `application.yml` with the following code：
 
 ```yaml
 eureka:
   instance:
-    # 注意根据不同的版本此处配置可能是 prefer-ip-address: true , 下同
+    # Note that this configuration may be prefer-ip-address: true depending on the version, as follows
     preferIpAddress: true
     metadata-map:
-    # 该配置为应用管理中应用的配置，可以通过 -Deureka.instance.metadata-map.dmp-application=DaoShop 在 Java Options 中传入。
+    # This configuration is for the application in Application Management and can be passed in Java Options via -Deureka.instance.metadata-map.dmp-application=DaoShop.
       dmp-application: DaoShop
   client:
     serviceUrl:

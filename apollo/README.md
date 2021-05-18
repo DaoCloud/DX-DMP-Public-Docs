@@ -1,71 +1,72 @@
-# 配置中心用户接入介绍
-此章节将会按照如下小节来讲解，你也可以直接挑选感兴趣的部分进行了解。
+# Introduction to Configuration Center User Access
+This section will be covered in the following subsections, or you can just pick and choose the parts that interest you.
 
-* [K8S环境下的开发模式](Apollo-ConfigSerivce-In-Docker-k8s.md)
-* [通过注解方式开启](annotation.md)
-* [通过配置文件开启](bootstrap.md)
-* [使用公共配置文件](Apollo-Public-Config.md)
-* [灰度发布](Apollo-GrayRule.md)
-* [Jar包容器化](docker.md)
-* [Json/xml类型的配置文件获取方法](json-and-xml-configFile.md)
+* [Development model in K8S environment](Apollo-ConfigSerivce-In-Docker-k8s.md)
+* [Open by annotation](annotation.md)
+* [Enabled by configuration file](bootstrap.md)
+* [Using public profiles](Apollo-Public-Config.md)
+* [Grayscale Release](Apollo-GrayRule.md)
+* [Jar package containerization](docker.md)
+* [Json/xml type configuration file get method](json-and-xml-configFile.md)
 
-更多使用可以参考[官方网站](https://github.com/ctripcorp/apollo/wiki/Java%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#3213-spring-boot%E9%9B%86%E6%88%90%E6%96%B9%E5%BC%8F%E6%8E%A8%E8%8D%90)
+For more use you can refer to[Official Website](https://github.com/ctripcorp/apollo/wiki/Java%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#3213-spring-boot%E9%9B%86%E6%88%90%E6%96%B9%E5%BC%8F%E6%8E%A8%E8%8D%90)
 
-## 介绍
-随着微服务的流行，应用和机器数量急剧增长，程序配置也愈加繁杂：各种功能的开关、参数的配置、服务器的地址等等。
+## Introduction
+With the popularity of microservices, the number of applications and machines has increased dramatically, and the program configuration has become more and more complicated: the switch of various functions, the configuration of parameters, the address of servers, etc. At the same time, we expect more and more from the program configuration: real-time effect after modification, gray release, sub-environment and sub-cluster management, perfect permission and audit mechanism, etc.
 
-同时，我们对程序配置的期望值也越来越高：配置修改后实时生效，灰度发布，分环境、分集群管理，完善的权限、审核机制等等。
+At the same time, our expectations of program configuration are also getting higher and higher: real-time effect after configuration modification, grayscale release, sub-environment and sub-cluster management, perfect permission and audit mechanism, and so on.
 
-在这样的大环境下，传统的通过配置文件、数据库等方式已经越来越无法满足我们对配置管理的需求。
+In this environment, the traditional way through the configuration file, database, etc. has become increasingly unable to meet our needs for configuration management.
 
-配置中心，应运而生！
+The Configuration Center was born!
 
-通过配置中心，我们可以方便地管理微服务在不同环境中的配置，从而可以在运行时动态调整服务行为，真正实现配置即『控制』的目标。
+Through the configuration center, we can easily manage the configuration of microservices in different environments, so that we can dynamically adjust the service behavior at runtime, and truly achieve the goal of "control" of configuration.
 
-所以，在一定程度上，配置中心就成为了微服务的大脑，如何用好这个大脑，让微服务更『智能』，也就成为了一项比较重要的议题。
+So, to a certain extent, the configuration center becomes the brain of microservices, and how to use this brain well to make microservices more 'intelligent' becomes a more important issue.
 
-DMP中的配置中心是由携程开源的Apollo配置中心定制化开发而来。同时，在对Apollo改造的过程中，也会向社区贡献自己的源码。
+The configuration center in DMP is developed by customizing the Apollo configuration center of Ctrip open source. Also, in the process of Apollo transformation, it will contribute its own source code to the community.
 
-通过配置中心的可视化操作界面，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。
+Through the visual operation interface of the configuration center, it can centralize and manage the configuration of different environments and clusters of the application, and the configuration can be pushed to the application side in real time after modification, and has standardized permissions, process governance and other features, which is suitable for microservice configuration management scenarios.
 
-服务端基于Spring Boot和Spring Cloud开发，打包后可以直接运行，不需要额外安装Tomcat等应用容器。
+The server side is developed based on Spring Boot and Spring Cloud, and can be run directly after packaging, without the need for additional installation of application containers such as Tomcat.
 
-Java客户端不依赖任何框架，能够运行于所有Java运行时环境，同时对Spring/Spring Boot环境也有较好的支持。
+Java client does not depend on any framework and can run on all Java runtime environments, and also has good support for Spring/Spring Boot environments.
 
-.Net客户端不依赖任何框架，能够运行于所有.Net运行时环境。
+.Net client does not rely on any framework , can run on all .
 
-## 配置中心特性：
 
-* **配置修改实时生效（热发布）**
-  * 用户在Apollo修改完配置并发布后，客户端能实时（1秒）接收到最新的配置，并通知到应用程序。
+## Configuration Center Features：
 
-* **版本发布管理**
-  * 所有的配置发布都有版本概念，从而可以方便的支持配置的回滚。
+* **Configuration changes take effect in real time (hot release)**
+  * After a user modifies the configuration and publishes it in Apollo, the client receives the latest configuration in real time (1 second) and is notified to the application.
 
-* **灰度发布**
-  * 支持配置的灰度发布，比如点了发布后，只对部分应用实例生效，等观察一段时间没问题后再推给所有应用实例。
+* **Release Management**
+  * All configuration releases have the concept of versioning so that rollback of the configuration can be easily supported.
 
-* **权限管理、发布审核、操作审计**
-  * 应用和配置的管理都有完善的权限管理机制，对配置的管理还分为了编辑和发布两个环节，从而减少人为的错误。
-  * 所有的操作都有审计日志，可以方便的追踪问题。
+* **Grayscale Release**
+  * Support grayscale release of the configuration, for example, after you click release, it only takes effect for some application instances, and then push it to all application instances after observing no problem for a period of time.
 
-* **统一管理不同环境、不同集群的配置**
-  * 提供了一个统一界面集中式管理不同环境（environment）、不同集群（cluster）、不同命名空间（namespace）的配置。
-  * 同一份代码部署在不同的集群，可以有不同的配置，比如zk的地址等
-  * 通过命名空间（namespace）可以很方便的支持多个不同应用共享同一份配置，同时还允许应用对共享的配置进行覆盖
+* **Permission management, release review, operation audit**
+  * The management of applications and configurations are well managed with permission management mechanisms, and the management of configurations is also divided into two parts: editing and publishing, thus reducing human errors.
+  * Audit logs are available for all operations, allowing easy tracking of problems.
 
-* **提供开放平台API**
-  * 自身提供了比较完善的统一配置管理界面，支持多环境、多数据中心配置管理、权限、流程治理等特性。
-  * 不过，出于通用性考虑，对配置的修改不会做过多限制，只要符合基本的格式就能够保存。
-  * 在我们的调研中发现，对于有些使用方，它们的配置可能会有比较复杂的格式，如xml, json，需要对格式做校验。
-  * 还有一些使用方如DAL，不仅有特定的格式，而且对输入的值也需要进行校验后方可保存，如检查数据库、用户名和密码是否匹配。
-  * 对于这类应用，支持应用方通过开放接口进行配置的修改和发布，并且具备完善的授权和权限控制
+* **Unified management of configurations for different environments and clusters**
+  * Provides a unified interface to centrally manage the configuration of different environments, clusters, and namespaces.
+  * The same code is deployed in different clusters and can have different configurations, such as the zk address, etc.
+  * Namespace makes it easy to support multiple applications sharing the same configuration, and also allows applications to override the shared configuration
 
-更多的资料可以参考：
+* **Provide open platform API**
+  * Itself provides a relatively complete unified configuration management interface, supporting multiple environments, multi-data center configuration management, permissions, process governance and other features.
+  * However, for reasons of generality, changes to the configuration will not be overly restrictive and can be saved as long as they conform to the basic format.
+  * In our research, we found that for some users, their configurations may have more complex formats, such as xml, json, and need to do validation on the format.
+  * There are also some users such as DAL, which not only have a specific format, but also require checks on the entered values before they can be saved, such as checking if the database, username and password match.
+  * For such applications, support the application side to modify and publish the configuration through the open interface, and have perfect authorization and permission control
 
-* [Apollo配置中心介绍](https://github.com/ctripcorp/apollo/wiki/Apollo%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BB%8B%E7%BB%8D) 
-* [携程开源配置中心Apollo的设计与实现](http://www.itdks.com/dakalive/detail/3420) , [Slides](https://myslide.cn/slides/10168)
-* [配置中心，让微服务更『智能』](https://2018.qconshanghai.com/presentation/799) , [Slides](https://myslide.cn/slides/10035)
+For more information you can refer to：
+
+* [Introduction to Apollo Configuration Center](https://github.com/ctripcorp/apollo/wiki/Apollo%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BB%8B%E7%BB%8D) 
+* [Design and implementation of Apollo, Ctrip's open source configuration center](http://www.itdks.com/dakalive/detail/3420) , [Slides](https://myslide.cn/slides/10168)
+* [Configuration Center, making microservices more 'intelligent'](https://2018.qconshanghai.com/presentation/799) , [Slides](https://myslide.cn/slides/10035)
 * [Github](https://github.com/ctripcorp/apollo)
 
 

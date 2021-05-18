@@ -1,21 +1,21 @@
-# 使用 Eureka Client 获得注册服务
+# Use Eureka Client to get registered services
 
-一些非 `Spring Boot` 类的 `JVM` 应用会选择直接使用 `Eureka Client` 获得服务的信息，此处的行为相较于 `Spring Cloud & Spring Boot` 需要自行与 `Http Client 客户端` 进行集成。
+Some non-`Spring Boot` class `JVM` applications choose to use the `Eureka Client` directly to get information about the service, which is a different behavior than `Spring Cloud & Spring Boot`, which requires its own integration with the `Http Client client`.
 
 ### Eureka Client
 
 ```java
 EurekaClient eurekaClient = DiscoveryManager.getEurekaClient();
 eurekaClient.getApplication("bookmark-service").getInstances((InstanceInfo instanceInfo)->{
-    // 此处的 InstanceInfo 即真实的实例对象
-    // 服务实例的端口号
+    // InstanceInfo here is the real instance object
+    // the port number of the service instance
     int port = instanceInfo.getPort();
-    // 服务实例的地址 (Hostname/IP) 决定于注册上来的地址
+    // The address of the service instance (Hostname/IP) is determined by the registered address
     String address = instanceInfo.getIPAddr();
     System.out.println(ToStringBuilder.reflectionToString(s));
 })
 ```
 
-## 附录
+## Appendix
 
 1. [EurekaClient Example](https://github.com/Netflix/eureka/blob/master/eureka-examples/src/main/java/com/netflix/eureka/ExampleEurekaClient.java)

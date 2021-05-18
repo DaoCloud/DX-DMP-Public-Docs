@@ -1,3 +1,3 @@
-# 服务发现
+# Service Discovery
 
-服务注册与发现的第二部分就是发现，也就是`客户端`应用能够从`注册服务`中获取到服务实例的列表。
+The second part of service registration and discovery is discovery, which is the list of service instances that the `client` application can get from the `registered service`.

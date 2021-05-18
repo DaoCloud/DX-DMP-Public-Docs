@@ -1,28 +1,28 @@
-# Envoy探针接入
+# Envoy Probe Access
 
-如果你的服务使用envoy作为网关，可以参考该文档。本文讲解如何将 envoy 接入到分布式链路追踪。
+If your service uses envoy as a gateway, you can refer to this document. This article explains how to connect envoy to distributed link tracing.
 
-## 前置条件
+## Pre-requisites
 
-### 环境安装配置
+### Environment installation configuration
 
-*注意：最新版本的(envoy1.17)才支持接入skywalking*
+*Note: access to skywalking is only supported by the latest version (envoy 1.17)*
 
-* envoy 1.17，[envoy安装详细内容](https://www.envoyproxy.io/docs/envoy/latest/start/install#)：
+* envoy 1.17，[envoy installation details](https://www.envoyproxy.io/docs/envoy/latest/start/install#)：
 
 ```bash
 sudo yum install getenvoy-envoy
 ```
 
-* skywalking 8及以上
+* skywalking 8 and above
 
-确保你的envoy是1.17版：
+Make sure your envoy is version 1.17:
 
 ```
 envoy --version
 ```
 
-## 探针接入
+## Probe access
 
 * envoy-swapm-demo.yaml
 
@@ -41,7 +41,7 @@ static_resources:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           stat_prefix: ingress_http
           generate_request_id: true
-          #从这里开始配置探针接入
+          #Start configuring probe access from here
           tracing:
             provider:
               name: envoy.tracers.skywalking
@@ -52,8 +52,8 @@ static_resources:
                     cluster_name: skywalking
                   timeout: 0.250s
                 client_config:
-                  #service_name 以 @结尾代表该服务所在 DMP 租户
-                  #instance_name 实例名字
+                  #service_name ends with @ for the DMP tenant where the service is located
+                  #instance_name Instance name
                   service_name: front-envoy@devTenant
                   instance_name: front-envoy-1
           access_log:
@@ -88,7 +88,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                # 你的skywaling opa地址与端口配置
+                # Your skywaling opa address and port configuration
                 address: 172.0.0.1
                 port_value: 11800
   - name: service_envoyproxy_io
@@ -118,7 +118,7 @@ admin:
 
 ```
 
-启动envoy
+Start envoy
 ```
 envoy -c envoy-swapm-demo.yaml
 ```

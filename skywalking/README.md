@@ -1,10 +1,10 @@
-# 分布式链路追踪接入
+# Distributed Link Tracking Access
 
-分布式追踪采用探针或者 SDK 的方式从应用程序中采集数据发送到后端收集器。
-因此，使用方法主要包括两步：
-- 安装探针/SDK
-- 配置后端地址及其它配置信息
+Distributed tracing uses probes or SDKs to collect data from the application and send it to a back-end collector.
+Therefore, the method of use consists of two main steps:
+- Installing the probe/SDK
+- Configure the back-end address and other configuration information
 
-本指南旨在帮助用户快速了解如何安装 Java 探针以及其他语言的探针。介绍了[JAVA 应用基于容器Sidecar的方式接入](docker-sidecar.md)的最佳实践。
+This guide is designed to help users quickly understand how to install Java probes as well as probes for other languages.Describes best practices for [JAVA application access based on container Sidecar](docker-sidecar.md).
 
-在接入过程中遇到问题？试试从[这里](faq/README.md)找到解决办法吧～
+Having problems with access? Try to find the solution from [here](faq/README.md) ~

@@ -1,6 +1,6 @@
-# Spring Boot & Spring Cloud 中使用服务发现
+### Using Service Discovery in Spring Boot & Spring Cloud
 
-### 使用 RestTemplate
+### Using RestTemplate
 
 ```java
 @Component
@@ -13,7 +13,7 @@ class RestTemplateExample implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         ResponseEntity<List<Bookmark>> exchange =
                 this.restTemplate.exchange(
-                        // 此处的 bookmark-service 在运行时会转换为真实的 IP:PORT
+                        // The bookmark-service here will be converted to the real IP:PORT when it runs
                         "http://bookmark-service/{userId}/bookmarks",
                         HttpMethod.GET,
                         null,
@@ -27,12 +27,12 @@ class RestTemplateExample implements CommandLineRunner {
 }
 ```
 
-### 使用 FeignClient
+### Using FeignClient
 
-`FeignClient` 是由 `Spring` 提供的一个 **声明式** 的`HTTP Client`。详细参考 [附录 1](#附录)
+`FeignClient` is an **declarative** `HTTP Client` provided by `Spring`. Refer to [Appendix 1](# Appendix) for details
 
 ```java
-// 此处的 bookmark-service 在运行时会转换为真实的 IP:PORT
+// The bookmark-service here will be converted to the real IP:PORT when it runs
 @FeignClient("bookmark-service")
 interface BookmarkClient {
 
@@ -41,9 +41,9 @@ interface BookmarkClient {
 }
 ```
 
-### 使用 DiscoveryClient
+### Using DiscoveryClient
 
-亦可以直接使用`Spring`提供的`Eureka Client`，直接获取到注册服务上的服务地址等信息。
+You can also use the `Eureka Client` provided by `Spring` to get the service address and other information directly from the registered services.
 
 ```java
 @Component
@@ -55,10 +55,10 @@ class DiscoveryClientExample implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         discoveryClient.getInstances("bookmark-service").forEach((ServiceInstance s) -> {
-            // 此处的 ServiceInstance 即真实的实例对象
-            // 服务实例的端口号
+            // The ServiceInstance here is the real instance object
+            // the port number of the service instance
             int port = s.getPort();
-            // 服务实例的地址 (Hostname/IP) 决定于注册上来的地址
+            // The address of the service instance (Hostname/IP) is determined by the registered address
             String host = s.getHost();
             System.out.println(ToStringBuilder.reflectionToString(s));
         });
@@ -66,6 +66,6 @@ class DiscoveryClientExample implements CommandLineRunner {
 }
 ```
 
-## 附录
+## Appendix
 
 1. [Declarative REST Client: Feign](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html)
