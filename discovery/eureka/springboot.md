@@ -1,4 +1,4 @@
-# [Recommended] SpringBoot & SpringCloud Access
+# SpringBoot & SpringCloud Access-Recommended Way
 
 ## Introducing dependencies
 

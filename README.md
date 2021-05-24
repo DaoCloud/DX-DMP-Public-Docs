@@ -1,4 +1,4 @@
-# Digital X Pilot——DaoCloud Microservices Platform (DMP)
+# DaoCloud Microservices Platform (DMP)
 
 ***DMP v2.5.0***
 

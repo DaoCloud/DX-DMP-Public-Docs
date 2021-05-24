@@ -1,6 +1,6 @@
-## General JVM access
+# General JVM access
 
-# # Introduce dependencies
+## Introduce dependencies
 
 In `pom.xml` add
 
