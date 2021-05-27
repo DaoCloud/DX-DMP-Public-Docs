@@ -17,7 +17,7 @@ The following is a practical example to describe how to use the grayscale releas
 - Full [grayscale] release
 
 ### 1 Create a configuration group
-There is an `appId=HoUoWWqxRj.apollo_gray` configuration group in the Configuration Center configuration group：
+There is an `appId=HoUoWWqxRj_apollo_gray` configuration group in the Configuration Center configuration group：
 ![HoUoWWqxRj.apollo_gray](img/gray-1.png)
 
 ### 2 Creating namespaces
