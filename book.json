@@ -35,7 +35,7 @@
         "tbfed-pagefooter",
         "splitter",
         "sitemap-general",
-        "-sharing", 
+        "-sharing",
         "sharing-plus",
         "github-buttons@2.1.0",
         "edit-link@^2.0.2",
@@ -101,4 +101,5 @@
         "anchor-navigation-ex": {
             "showLevel": false
         }
+    }
 }
